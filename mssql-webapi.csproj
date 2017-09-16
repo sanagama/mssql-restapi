@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0" />
@@ -21,4 +17,25 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
 
+  <!-- Include references to SMO .NET Core assemblies for OSX vs. Debian -->
+  <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Core'">
+    <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+    <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="./smo-dotnet-core/osx/*.dll" Condition="'$(IsOSX)' == 'true'" />
+    <Reference Include="./smo-dotnet-core/debian/*.dll" Condition="'$(IsLinux)' == 'true'" />
+  </ItemGroup>
+
+  <Target Name="PrintRID" BeforeTargets="Build">
+    <Message Text="IsOSX $(IsOSX)" Importance="high" />
+    <Message Text="IsLinux $(IsLinux)" Importance="high" />
+  </Target>
+
+<!--
+  <Target Name="PrintRefs" BeforeTargets="Build">
+    <Message Text="References @(Reference)" Importance="high" />
+  </Target>
+-->
 </Project>
