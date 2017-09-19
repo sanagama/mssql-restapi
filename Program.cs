@@ -7,20 +7,60 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
+using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            // Initialize Serilog
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
+            try
+            {
+                Log.Information("*** REST API for SQL Server (hosted on ASP.NET Core Web API)");
+                TestSqlServerConnection();
+                StartWebHost();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "*** Host terminated unexpectedly, examine exception.");
+                return 1;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-                    WebHost.CreateDefaultBuilder(args)
-                        .UseUrls("https://*:5000")
-                        .UseStartup<Startup>()
-                        .Build();
+        private static void TestSqlServerConnection()
+        {             
+            Log.Information("Testing connection to SQL Server");
+            var ctx = new ServerContext();
+            Log.Information("Test connection successful. SQL Server version: {0}", ctx.SmoServer.VersionString);
+        }
+
+        private static void StartWebHost()
+        {
+            Log.Information("Starting Web Host");
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .UseSerilog()
+                .Build();
+            host.Run();
+        }
     }
 }

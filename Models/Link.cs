@@ -4,10 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MSSqlWebapi.Models
 {
-    public class Column
+    public class Link
     {
-        [Key]
-        public string Name { get; set; }
-        public DateTime Created { get; set; }
+        public string rel;
+        public Uri href;
     }
 }
