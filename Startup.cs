@@ -13,6 +13,7 @@ using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Events;
 using MSSqlWebapi.Models;
+using MSSqlWebapi.Infrastructure;
 
 namespace MSSqlWebapi
 {
@@ -39,6 +40,7 @@ namespace MSSqlWebapi
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
+                options.Filters.Add(typeof(LinkRewritingFilter));
             })
             .AddJsonOptions(options =>
             {

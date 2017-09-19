@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MSSqlWebapi.Models
 {
-    public class Column
-    {
+    public sealed class TableEntity
+    {        
         [Key]
         public string Name { get; set; }
-        public DateTime Created { get; set; }
+        public ICollection<ColumnEntity> Columns { get; set; }
     }
 }

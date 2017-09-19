@@ -18,10 +18,17 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET mssql
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet(Name = nameof(GetRoot))]
+        public IActionResult GetRoot()
         {
-            return Ok(new Server(_context.SmoServer));
+            var response = new ServerResource(_context.SmoServer)
+            {
+                Self = Link.To(nameof(GetRoot)),
+                Databases = null
+            };
+
+            return Ok(response);
+
         }
 
         // POST mssql
