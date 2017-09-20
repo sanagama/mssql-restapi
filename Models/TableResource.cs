@@ -4,11 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MSSqlWebapi.Models
 {
-    public sealed class DatabaseEntity
-    {
-        [Key]
+    public sealed class TableResource
+    {        
         public string Name { get; set; }
-        public DateTime Created { get; set; }
-        public ICollection<TableEntity> Tables { get; set; }
+        public ICollection<ColumnEntity> Columns { get; set; }
     }
 }

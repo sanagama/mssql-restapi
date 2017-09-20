@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 //
@@ -6,9 +7,12 @@ using Newtonsoft.Json;
 //
 namespace MSSqlWebapi.Models
 {
-    public abstract class Resource : Link
+    public abstract class Resource
     {
-        [JsonIgnore]
-        public Link Self { get; set; }
+        [JsonProperty(Order = -4)]
+        public Uri self { get; set; }
+
+        [JsonProperty(Order = -4)]
+        public Uri parent { get; set; }
     }
 }
