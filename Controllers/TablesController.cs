@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRouteTables)]
+    [Route(Constants.ApiRoutePathTables)]
     public class TablesController : Controller
     {
         private ServerContext _context;
@@ -21,7 +21,7 @@ namespace MSSqlWebapi.Controllers
 
         // GET: api/mssql/databases/AdventureworksLT/tables
         [HttpGet]
-        [Route(Constants.ApiRouteTables, Name = Constants.ApiRouteNameTables)]
+        [Route(Constants.ApiRoutePathTables, Name = Constants.ApiRouteNameTables)]
         public IActionResult GetTables(string dbName)
         {
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
@@ -29,22 +29,20 @@ namespace MSSqlWebapi.Controllers
             {
                 return NotFound();
             }
-            else
+
+            // Project a list of TableResource objects
+            List<TableResource> resources = new List<TableResource>();
+            foreach(SMO.Table smoTable in smoDb.Tables)
             {
-                // Project a list of TableResource objects
-                List<TableResource> resources = new List<TableResource>();
-                foreach(SMO.Table smoTable in smoDb.Tables)
-                {
-                    TableResource resource = new TableResource(smoTable, @Url);
-                    resources.Add(resource);
-                }
-                return Ok(resources);
+                TableResource resource = new TableResource(smoTable, @Url);
+                resources.Add(resource);
             }
+            return Ok(resources);
         }
 
         // GET: api/mssql/databases/AdventureworksLT/tables/Product
         [HttpGet]
-        [Route(Constants.ApiRouteTable, Name = Constants.ApiRouteNameTable)]
+        [Route(Constants.ApiRoutePathTable, Name = Constants.ApiRouteNameTable)]
         public IActionResult GetTable(string dbName, string tableName)
         {
             SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
@@ -52,20 +50,16 @@ namespace MSSqlWebapi.Controllers
             {
                 return NotFound();
             }
-            else
+
+            SMO.Table smoTable = smoDb.Tables[tableName];
+            if(smoTable == null)
             {
-                SMO.Table smoTable = smoDb.Tables[tableName];
-                if(smoTable == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    // Project a TableResource object
-                    TableResource resource = new TableResource(smoTable, @Url);
-                    return Ok(resource);
-                }
+                return NotFound();
             }
+
+            // Project a TableResource object
+            TableResource resource = new TableResource(smoTable, @Url);
+            return Ok(resource);
         }
 
         // POST: api/mssql/databases/AdventureworksLT/tables

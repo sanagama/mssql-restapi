@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
+using Serilog;
+using Serilog.Events;
 
 namespace MSSqlWebapi.Models
 {
@@ -12,21 +14,22 @@ namespace MSSqlWebapi.Models
         public int Id { get { return this._smoTable.ID; } }
         public DateTime CreateDate { get { return this._smoTable.CreateDate; } }
         public long RowCount { get { return this._smoTable.RowCount; } }
+        public long ColumnCount { get { return this._smoTable.Columns.Count; } }
         public Uri Script { get; set; }
         public Uri Columns { get; set; }
+        public Uri Data { get; set; }
         private SMO.Table _smoTable;
         public TableResource(SMO.Table smoTable, IUrlHelper urlHelper)
         {
             this._smoTable = smoTable;
             this.UpdateLinks(urlHelper);
         }
-
         public override void UpdateLinks(IUrlHelper urlHelper)
         {
-            // tables
+            // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTable,   // Route
+                Constants.ApiRouteNameTable,
                 new
                 {
                     dbName = this._smoTable.Parent.Name,
@@ -38,9 +41,9 @@ namespace MSSqlWebapi.Models
             // parent
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameDatabases,    // Route
-                new { dbName = this._smoTable.Parent.Name },         // route parameters
-                urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
+                Constants.ApiRouteNameDatabase,
+                new { dbName = this._smoTable.Parent.Name },
+                urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 
             // script
@@ -55,8 +58,20 @@ namespace MSSqlWebapi.Models
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 
+            // columns
+            this.Columns = new Uri(
+                urlHelper.RouteUrl(
+                Constants.ApiRouteNameTableColumns,
+                new
+                {
+                    dbName = this._smoTable.Parent.Name,
+                    tableName = this._smoTable.Name
+                },
+                urlHelper.ActionContext.HttpContext.Request.Scheme
+            ));
+
 /*
-            // rows
+            // rows (data)
             this.Tables = new Uri(
                 urlHelper.RouteUrl(
                 Constants.ApiRouteNameScript,   // Route

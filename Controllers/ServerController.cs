@@ -6,43 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlWebapi.Models;
-using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRouteRoot)]
+    [Route(Constants.ApiRoutePathRoot)]
     public class ServerController : Controller
     {
         private ServerContext _context;
-
-/*
-        private ServerResource CreateServerResource()
-        {
-            serverResource.self = new Uri(
-                @Url.RouteUrl(
-                    Constants.ApiRouteNameServer,   // Route
-                    null,                           // route parameters
-                    @Url.ActionContext.HttpContext.Request.Scheme   // scheme
-            ));
-
-            serverResource.Databases = new Uri(
-                @Url.RouteUrl(
-                    Constants.ApiRouteNameDatabases,    // Route
-                    null,                               // route parameters
-                    @Url.ActionContext.HttpContext.Request.Scheme   // scheme
-            ));
-
-            serverResource.Databases = new Uri(
-                @Url.Action(
-                    "GetDatabases", // the Name in [HttpXXX] method
-                    "Databases",     // the controller name 
-                    null,           // route parameters
-                    @Url.ActionContext.HttpContext.Request.Scheme   // scheme
-                ));
-
-            return serverResource;
-        }
- */
 
         public ServerController(ServerContext context)
         {
@@ -51,7 +21,7 @@ namespace MSSqlWebapi.Controllers
 
         // GET: api/mssql
         [HttpGet]
-        [Route(Constants.ApiRouteRoot, Name = Constants.ApiRouteNameServer)]
+        [Route(Constants.ApiRoutePathRoot, Name = Constants.ApiRouteNameServer)]
         public IActionResult Get()
         {
             var resource = new ServerResource(this._context, @Url);

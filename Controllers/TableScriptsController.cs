@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlWebapi.Models;
-using System.Text;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRouteTableScript)]
+    [Route(Constants.ApiRoutePathTableScript)]
     public class TableScriptsController : Controller
     {
         private ServerContext _context;
@@ -24,7 +23,7 @@ namespace MSSqlWebapi.Controllers
         // GET: api/mssql/databases/AdventureworksLT/Orders/script
         //
         [HttpGet]
-        [Route(Constants.ApiRouteTableScript, Name = Constants.ApiRouteNameTableScript)]
+        [Route(Constants.ApiRoutePathTableScript, Name = Constants.ApiRouteNameTableScript)]
         public IActionResult GetTableScript(string dbName, string tableName)
         {
             TableScriptResource resource = new TableScriptResource(this._context, dbName, tableName, @Url);
