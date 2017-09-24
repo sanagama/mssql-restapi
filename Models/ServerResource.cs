@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using SMO = Microsoft.SqlServer.Management.Smo;  
+using SMOCommon = Microsoft.SqlServer.Management.Common;  
+
+namespace MSSqlWebapi.Models
+{
+    public class ServerResource : Resource
+    {
+        public string Name { get { return this.SmoServer.Name; }  }
+        public string Product { get { return this.SmoServer.Product; } }
+        public string HostPlatform { get{ return this.SmoServer.HostPlatform; } }
+        public string Edition { get { return this.SmoServer.Edition; } }
+        public string VersionString { get { return this.SmoServer.VersionString; } }
+        public string NetName { get { return this.SmoServer.Information.NetName; } }
+        
+        public Uri Databases { get; set; }
+        private ServerContext _serverContext;
+        private SMO.Server SmoServer { get { return this._serverContext.SmoServer; } }
+
+        public ServerResource(ServerContext serverContext, IUrlHelper urlHelper)
+        {
+            this._serverContext = serverContext;
+            this.UpdateLinks(urlHelper);
+        }
+
+        public override void UpdateLinks(IUrlHelper urlHelper)
+        {
+            base.links[Constants.LinkNameSelf] = new Uri(
+                urlHelper.RouteUrl(
+                Constants.ApiRouteNameServer,   // Route
+                null,                           // route parameters
+                urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
+            ));
+
+            this.Databases = new Uri(
+                urlHelper.RouteUrl(
+                Constants.ApiRouteNameDatabases,    // Route
+                null,                               // route parameters
+                urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
+            ));
+        }
+    }
+}

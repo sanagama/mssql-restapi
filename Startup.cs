@@ -35,6 +35,9 @@ namespace MSSqlWebapi
             // Initialize SMO ServerContext from environment variables
             services.AddSingleton<ServerContext>(c => new ServerContext());
 
+            // Lower-case URLs
+            services.AddRouting(options => options.LowercaseUrls = true);
+
             // Add MVC
             services.AddMvc(options =>
             {

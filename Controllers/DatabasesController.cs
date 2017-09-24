@@ -6,99 +6,50 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlWebapi.Models;
-using System.Text;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route("api/mssql/[controller]")]
+    [Route(Constants.ApiRouteDatabases)]
     public class DatabasesController : Controller
     {
         private ServerContext _context;
 
-        private DatabaseResource CreateDatabaseResource(SMO.Database db)
-        {
-            var dbResource = new DatabaseResource(db);
-            dbResource.self = new Uri(@Url.Link("GetDatabase", new { dbName = dbResource.Name }));
-            dbResource.parent = new Uri(@Url.Link("GetDatabases", null));
-            //dbResource.TSqlScript = new Uri(@Url.Link("GetTSqlScript", new { dbName = dbResource.Name }));
-            //dbResource.TSqlScript = new Uri(@Url.Action("Get", "TSqlScript", new { dbName = dbResource.Name }, @Url.ActionContext.HttpContext.Request.Scheme));
-            dbResource.Tables = null;
-            return dbResource;
-        }
-
         public DatabasesController(ServerContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         // GET: api/mssql/databases
-        //[HttpGet]
-        [HttpGet(Name = "GetDatabases")]
-        public IActionResult GetAll()
+        [HttpGet]
+        [Route(Constants.ApiRouteDatabases, Name = Constants.ApiRouteNameDatabases)]
+        public IActionResult GetDatabases()
         {
-            // Project a list DatabaseResource objects
-            List<DatabaseResource> dbResources = new List<DatabaseResource>();
-            foreach(SMO.Database db in _context.SmoServer.Databases)
+            // Project a list of DatabaseResource objects
+            List<DatabaseResource> resources = new List<DatabaseResource>();
+            foreach(SMO.Database smoDb in this._context.SmoServer.Databases)
             {
-                dbResources.Add(CreateDatabaseResource(db));
+                var resource = new DatabaseResource(smoDb, @Url);
+                resources.Add(resource);
             }
-
-            var response = new 
-            {
-                self = new Uri(@Url.Link("GetDatabases", null)),
-                parent = new Uri(@Url.Action("Get", "Root", null, @Url.ActionContext.HttpContext.Request.Scheme)),
-                items = dbResources
-            };
-            return new ObjectResult(response);
+            return Ok(resources);
         }
 
         // GET: api/mssql/databases/AdventureworksLT
-        [HttpGet("{dbName}", Name = "GetDatabase")]
-        public IActionResult GetByName(string dbName)
+        [HttpGet]
+        [Route(Constants.ApiRouteDatabase, Name = Constants.ApiRouteNameDatabase)]
+        public IActionResult GetDatabase(string dbName)
         {
-            SMO.Database db = _context.SmoServer.Databases[dbName];
-            if (db == null)
+            SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
+            if (smoDb == null)
             {
                 return NotFound();
             }
             else
             {
-                return new ObjectResult(CreateDatabaseResource(db));
+                // Project a DatabaseResource object
+                var resource = new DatabaseResource(smoDb, @Url);
+                return Ok(resource);
             }
-        }
-
-        // GET: api/mssql/databases/AdventureworksLT
-        // Generate T-SQL scripts for Database
-        //
-        //
-        // SMO scripting doesn't work yet
-        //
-        // SMO in .NET Core fails with this exception:
-        // Microsoft.SqlServer.Management.Smo.FailedOperationException: 
-        //  Script failed for Database 'master'.  ---> System.IO.FileNotFoundException: 
-        //  Could not load file or assembly 'Microsoft.Data.Tools.Sql.BatchParser, 
-        //  Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
-        //  The system cannot find the file specified.
-        //
-        //
-        [HttpGet("{dbName}", Name = "TSqlScript")]
-        public ContentResult GenerateScript(string dbName)
-        {
-            string generatedScript = "-- T-SQL script --\n\n";
-            SMO.Database db = _context.SmoServer.Databases[dbName];
-            if (db == null)
-            {
-                generatedScript = String.Format("Database {0} not found. T-SQL script not generated.", dbName);
-            }
-            else
-            {
-                var scripter = new SMO.Scripter(this._context.SmoServer);
-                var options = new SMO.ScriptingOptions { ScriptSchema = true };
-                var scripts = db.Script(options);
-                foreach (var script in scripts)
-                    generatedScript += script;
-            }
-            return Content(generatedScript);
         }
 
         // POST: api/mssql/databases
@@ -108,14 +59,14 @@ namespace MSSqlWebapi.Controllers
             return BadRequest();
         }
 
-        // PUT: api/mssql/databases
+        // PUT: api/mssql/databases/AdventureworksLT
         [HttpPut]
         public IActionResult Put([FromBody]string value)
         {
             return BadRequest();
         }
 
-        // DELETE: api/mssql/databases
+        // DELETE: api/mssql/databases/AdventureworksLT
         [HttpDelete]
         public IActionResult Delete()
         {

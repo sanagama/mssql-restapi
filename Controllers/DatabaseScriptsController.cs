@@ -6,50 +6,47 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlWebapi.Models;
+using System.Text;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route("/api/mssql")]
-    public class RootController : Controller
+    [Route(Constants.ApiRouteDatabaseScript)]
+    public class DatabaseScriptsController : Controller
     {
         private ServerContext _context;
 
-        private RootResource CreateRootResource(SMO.Server server)
+        public DatabaseScriptsController(ServerContext context)
         {
-            var rootResource = new RootResource(server);
-            rootResource.self = new Uri(@Url.Action("Get", "Root", null, @Url.ActionContext.HttpContext.Request.Scheme));
-            rootResource.parent = null;
-            rootResource.Databases = new Uri(@Url.Link("GetDatabases", null));
-            return rootResource;
+            this._context = context;
         }
 
-        public RootController(ServerContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/mssql
+        // Generate CREATE T-SQL script for Database
+        // GET: api/mssql/{dbName}/script
+        // GET: api/mssql/databases/AdventureworksLT/script
+        //
         [HttpGet]
-        public IActionResult Get()
+        [Route(Constants.ApiRouteDatabaseScript, Name = Constants.ApiRouteNameDatabaseScript)]
+        public IActionResult GetDatabaseScript(string dbName)
         {
-            return Ok(CreateRootResource(_context.SmoServer));
+            DatabaseScriptResource resource = new DatabaseScriptResource(this._context, dbName, @Url);
+            return Ok(resource);
         }
 
-        // POST: api/mssql
+        // POST: api/mssql/{dbName}/script
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
             return BadRequest();
         }
 
-        // PUT: api/mssql
+        // PUT: api/mssql/{dbName}/script
         [HttpPut]
         public IActionResult Put([FromBody]string value)
         {
             return BadRequest();
         }
 
-        // DELETE: api/mssql
+        // DELETE: api/mssql/{dbName}/script
         [HttpDelete]
         public IActionResult Delete()
         {

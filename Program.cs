@@ -55,8 +55,8 @@ namespace MSSqlWebapi
             Log.Information("Starting Web Host");
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseSerilog()
                 .Build();

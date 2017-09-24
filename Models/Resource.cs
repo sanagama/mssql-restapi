@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-//
-// Inspired by: https://github.com/nbarbettini/BeautifulRestApi
-//
 namespace MSSqlWebapi.Models
 {
     public abstract class Resource
     {
         [JsonProperty(Order = -4)]
-        public Uri self { get; set; }
+        public Dictionary<string, Uri> links;
 
-        [JsonProperty(Order = -4)]
-        public Uri parent { get; set; }
+        public Resource()
+        {
+            this.links = new Dictionary<string, Uri>();
+        }
+
+        public abstract void UpdateLinks(IUrlHelper urlHelper);
     }
 }

@@ -11,11 +11,14 @@ namespace MSSqlWebapi.Models
     public class ServerContext
     {
         private string _host;
+        public string Host { get {return this._host;} }
         private string _port;
+        public string Port { get {return this._port;} }
         private string _username;
+        public string Username { get {return this._username;} }
         private string _password;
+        public string Password { get {return this._password;} }
         private SMO.Server _smoServer;
-        private SMOCommon.ServerConnection _serverConnection;
 
         public SMO.Server SmoServer
         {
@@ -76,8 +79,8 @@ namespace MSSqlWebapi.Models
                     builder.InitialCatalog = "master";
                     
                     SqlConnection sqlConnection = new SqlConnection(builder.ConnectionString);
-                    _serverConnection = new SMOCommon.ServerConnection(sqlConnection);
-                    _smoServer = new SMO.Server(_serverConnection);
+                    SMOCommon.ServerConnection serverConnection = new SMOCommon.ServerConnection(sqlConnection);
+                    _smoServer = new SMO.Server(serverConnection);
                 }
                 catch(SqlException e)
                 {
