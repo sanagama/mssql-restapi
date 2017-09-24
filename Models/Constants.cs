@@ -33,8 +33,8 @@ namespace MSSqlWebapi.Models
         public const string ApiRouteNameTableColumn = "column";
         public const string ApiRoutePathTableColumn = Constants.ApiRoutePathTableColumns + "/{columnName}";
 
-        public const string ApiRouteNameTableRows = "rows";
-        public const string ApiRoutePathTableRows = Constants.ApiRoutePathTable + "/" + Constants.ApiRouteNameTableRows;
+        public const string ApiRouteNameTableTop100Rows = "top100rows";
+        public const string ApiRoutePathTableTop100Rows = Constants.ApiRoutePathTable + "/" + Constants.ApiRouteNameTableTop100Rows;
 
 
         public const string SqlServerEnvVarHost = "SQLSERVER_HOST";

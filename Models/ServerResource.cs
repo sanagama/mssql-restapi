@@ -14,7 +14,6 @@ namespace MSSqlWebapi.Models
         public string HostPlatform { get{ return this.SmoServer.HostPlatform; } }
         public string Edition { get { return this.SmoServer.Edition; } }
         public string VersionString { get { return this.SmoServer.VersionString; } }
-        public string NetName { get { return this.SmoServer.Information.NetName; } }
         
         public Uri Databases { get; set; }
         private ServerContext _serverContext;

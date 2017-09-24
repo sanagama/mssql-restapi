@@ -17,7 +17,7 @@ namespace MSSqlWebapi.Models
         public long ColumnCount { get { return this._smoTable.Columns.Count; } }
         public Uri Script { get; set; }
         public Uri Columns { get; set; }
-        public Uri Data { get; set; }
+        public Uri Top100Rows { get; set; }
         private SMO.Table _smoTable;
         public TableResource(SMO.Table smoTable, IUrlHelper urlHelper)
         {
@@ -70,15 +70,17 @@ namespace MSSqlWebapi.Models
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 
-/*
-            // rows (data)
-            this.Tables = new Uri(
+            // top 100 rows
+            this.Top100Rows = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameScript,   // Route
-                new { dbName = this.Name },     // route parameters
-                urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
+                Constants.ApiRouteNameTableTop100Rows,
+                new
+                {
+                    dbName = this._smoTable.Parent.Name,
+                    tableName = this._smoTable.Name
+                },
+                urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
-*/
         }
     }
 }

@@ -2,6 +2,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
+using Serilog;
+using Serilog.Events;
 
 namespace MSSqlWebapi.Models
 {
@@ -30,6 +32,7 @@ namespace MSSqlWebapi.Models
                     this._scriptBody = String.Format(
                         "Database {0} not found. No T-SQL script generated.",
                         this._dbName);
+                    Log.Warning(this._scriptBody);
                 }
                 else
                 {
@@ -47,6 +50,7 @@ namespace MSSqlWebapi.Models
                 this._scriptBody = String.Format(
                     "Error while generating script for database {0}\n\n{1}",
                     this._dbName, e.ToString());
+                Log.Error(this._scriptBody);
             }
         }
         public override void UpdateLinks(IUrlHelper urlHelper)

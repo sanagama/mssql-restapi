@@ -2,6 +2,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
+using Serilog;
+using Serilog.Events;
 
 namespace MSSqlWebapi.Models
 {
@@ -32,6 +34,7 @@ namespace MSSqlWebapi.Models
                     this._scriptBody = String.Format(
                         "Database {0} not found. No T-SQL script generated.",
                         this._dbName);
+                    Log.Warning(this._scriptBody);
                 }
                 else
                 {
@@ -41,6 +44,7 @@ namespace MSSqlWebapi.Models
                         this._scriptBody = String.Format(
                             "Table {0} not found in Database {1}. No T-SQL script generated.",
                             this._tableName, this._dbName);
+                        Log.Warning(this._scriptBody);
                     }
                     else
                     {
@@ -59,15 +63,21 @@ namespace MSSqlWebapi.Models
                 this._scriptBody = String.Format(
                     "Error while generating script for table {0} in database {1}\n\n{2}",
                     this._tableName, this._dbName, e.ToString());
+                Log.Error(this._scriptBody);
             }
         }
+
         public override void UpdateLinks(IUrlHelper urlHelper)
         {
             // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
                 Constants.ApiRouteNameTableScript,
-                new { dbName = this._dbName },
+                new
+                {
+                    dbName = this._dbName,
+                    tableName = this._tableName
+                },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 

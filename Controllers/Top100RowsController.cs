@@ -10,41 +10,41 @@ using MSSqlWebapi.Models;
 namespace MSSqlWebapi.Controllers
 {
     [Route(Constants.ApiRoutePathTableScript)]
-    public class TableScriptsController : Controller
+    public class Top100RowsController : Controller
     {
         private ServerContext _context;
-        public TableScriptsController(ServerContext context)
+        public Top100RowsController(ServerContext context)
         {
             this._context = context;
         }
 
         // Generate CREATE T-SQL script for Table
-        // GET: api/mssql/databases/{dbName}/{tableName}/script
-        // GET: api/mssql/databases/AdventureworksLT/Orders/script
+        // GET: api/mssql/databases/{dbName}/{tableName}/top100rows
+        // GET: api/mssql/databases/AdventureworksLT/Orders/top100rows
         //
         [HttpGet]
-        [Route(Constants.ApiRoutePathTableScript, Name = Constants.ApiRouteNameTableScript)]
+        [Route(Constants.ApiRoutePathTableTop100Rows, Name = Constants.ApiRouteNameTableTop100Rows)]
         public IActionResult GetTableScript(string dbName, string tableName)
         {
-            TableScriptResource resource = new TableScriptResource(this._context, dbName, tableName, @Url);
+            Top100RowsResource resource = new Top100RowsResource(this._context, dbName, tableName, @Url);
             return Ok(resource);
         }
 
-        // POST: api/mssql/databases/{dbName}/{tableName}/script
+        // POST: api/mssql/databases/{dbName}/{tableName}/top100rows
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
             return BadRequest();
         }
 
-        // PUT: api/mssql/databases/{dbName}/{tableName}/script
+        // PUT: api/mssql/databases/{dbName}/{tableName}/top100rows
         [HttpPut]
         public IActionResult Put([FromBody]string value)
         {
             return BadRequest();
         }
 
-        // DELETE: api/mssql/databases/{dbName}/{tableName}/script
+        // DELETE: api/mssql/databases/{dbName}/{tableName}/top100rows
         [HttpDelete]
         public IActionResult Delete()
         {
