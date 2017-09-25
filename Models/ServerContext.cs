@@ -35,16 +35,16 @@ namespace MSSqlWebapi.Models
         public ServerContext()
         {
             Log.Information("Initializing ServerContext with Environment variables:");
-            this._host = Environment.GetEnvironmentVariable(Constants.SqlServerEnvVarHost) ?? Constants.DefaultHost;
-            this._port = Environment.GetEnvironmentVariable(Constants.SqlServerEnvVarPort) ?? Constants.DefaultPort;
-            this._username = Environment.GetEnvironmentVariable(Constants.SqlServerEnvVarUsername) ?? Constants.DefaultUsername;
-            this._password = Environment.GetEnvironmentVariable(Constants.SqlServerEnvVarPassword) ?? Constants.DefaultPassword;
+            this._host = Environment.GetEnvironmentVariable(Constants.MSSQLEnvVarHost) ?? Constants.MSSQLDefaultHost;
+            this._port = Environment.GetEnvironmentVariable(Constants.MSSQLEnvVarPort) ?? Constants.MSSQLDefaultPort;
+            this._username = Environment.GetEnvironmentVariable(Constants.MSSQLEnvVarUsername) ?? Constants.MSSQLDefaultUsername;
+            this._password = Environment.GetEnvironmentVariable(Constants.MSSQLEnvVarPassword) ?? Constants.MSSQLDefaultPassword;
 
             Log.Information("{0}: {1}, {2}: {3}, {4}: {5}, {6}: {7}",
-                Constants.SqlServerEnvVarHost, this._host,
-                Constants.SqlServerEnvVarPort, this._port,
-                Constants.SqlServerEnvVarUsername, this._username,
-                Constants.SqlServerEnvVarPassword, this._password);
+                Constants.MSSQLEnvVarHost, this._host,
+                Constants.MSSQLEnvVarPort, this._port,
+                Constants.MSSQLEnvVarUsername, this._username,
+                Constants.MSSQLEnvVarPassword, this._password);
 
             this.Initialize();
         }

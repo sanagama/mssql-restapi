@@ -55,6 +55,7 @@ namespace MSSqlWebapi
             Log.Information("Starting Web Host");
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls("http://*:5000") // listen on port 5000 on all network interfaces
                 .UseIISIntegration()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
@@ -64,3 +65,4 @@ namespace MSSqlWebapi
         }
     }
 }
+

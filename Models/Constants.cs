@@ -37,13 +37,13 @@ namespace MSSqlWebapi.Models
         public const string ApiRoutePathTableTop100Rows = Constants.ApiRoutePathTable + "/" + Constants.ApiRouteNameTableTop100Rows;
 
 
-        public const string SqlServerEnvVarHost = "SQLSERVER_HOST";
-        public const string SqlServerEnvVarPort = "SQLSERVER_PORT";
-        public const string SqlServerEnvVarUsername = "SQLSERVER_USERNAME";
-        public const string SqlServerEnvVarPassword = "SQLSERVER_PASSWORD";
-        public const string DefaultHost = "127.0.0.1";
-        public const string DefaultPort = "1433";
-        public const string DefaultUsername = "sa";
-        public const string DefaultPassword = "Yukon900";
+        public const string MSSQLEnvVarHost = "MSSQL_HOST";
+        public const string MSSQLEnvVarPort = "MSSQL_PORT";
+        public const string MSSQLEnvVarUsername = "MSSQL_USERNAME";
+        public const string MSSQLEnvVarPassword = "MSSQL_PASSWORD";
+        public const string MSSQLDefaultHost = "127.0.0.1";
+        public const string MSSQLDefaultPort = "1433";
+        public const string MSSQLDefaultUsername = "sa";
+        public const string MSSQLDefaultPassword = "Yukon900";
     }
 }
