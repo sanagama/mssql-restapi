@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathTableColumns)]
+    [Route("/api/mssql/databases/{dbName}/tables/{tableName}/[controller]")]
     public class ColumnsController : Controller
     {
         private ServerContext _context;
@@ -19,9 +19,8 @@ namespace MSSqlWebapi.Controllers
             this._context = context;
         }
 
-        // GET: api/mssql/databases/AdventureworksLT/Product/columns
-        [HttpGet]
-        [Route(Constants.ApiRoutePathTableColumns, Name = Constants.ApiRouteNameTableColumns)]
+        // GET: api/mssql/databases/AdventureworksLT/tables/Product/columns
+        [HttpGet(Name = Constants.ApiRouteNameTableColumns)]
         public IActionResult GetColumns(string dbName, string tableName)
         {
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
@@ -46,9 +45,8 @@ namespace MSSqlWebapi.Controllers
             return Ok(resources);
         }
 
-        // GET: api/mssql/databases/AdventureworksLT/Product/columns/{column}
-        [HttpGet]
-        [Route(Constants.ApiRoutePathTableColumn, Name = Constants.ApiRouteNameTableColumn)]
+        // GET: api/mssql/databases/AdventureworksLT/tables/Product/columns/{columnName}
+        [HttpGet("{columnName}", Name = Constants.ApiRouteNameTableColumn)]
         public IActionResult GetColumn(string dbName, string tableName, string columnName)
         {
             SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
@@ -74,21 +72,21 @@ namespace MSSqlWebapi.Controllers
             return Ok(resource);
         }
 
-        // POST: api/mssql/databases/AdventureworksLT/Product/columns
+        // POST: api/mssql/databases/AdventureworksLT/tables/Product/columns
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
             return BadRequest();
         }
 
-        // PUT: api/mssql/databases/AdventureworksLT/Product/columns/{columnName}
+        // PUT: api/mssql/databases/AdventureworksLT/tables/Product/columns/{columnName}
         [HttpPut]
         public IActionResult Put([FromBody]string value)
         {
             return BadRequest();
         }
 
-        // DELETE: api/mssql/databases/AdventureworksLT/Product/columns/{columnName}
+        // DELETE: api/mssql/databases/AdventureworksLT/tables/Product/columns/{columnName}
         [HttpDelete]
         public IActionResult Delete()
         {

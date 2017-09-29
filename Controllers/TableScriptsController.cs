@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathTableScript)]
+    [Route("/api/mssql/databases/{dbName}/tables/{tableName}/script")]
     public class TableScriptsController : Controller
     {
         private ServerContext _context;
@@ -19,32 +19,31 @@ namespace MSSqlWebapi.Controllers
         }
 
         // Generate CREATE T-SQL script for Table
-        // GET: api/mssql/databases/{dbName}/{tableName}/script
-        // GET: api/mssql/databases/AdventureworksLT/Orders/script
+        // GET: api/mssql/databases/{dbName}/tables/{tableName}/script
+        // GET: api/mssql/databases/AdventureworksLT/tables/Orders/script
         //
-        [HttpGet]
-        [Route(Constants.ApiRoutePathTableScript, Name = Constants.ApiRouteNameTableScript)]
+        [HttpGet(Name = Constants.ApiRouteNameTableScript)]
         public IActionResult GetTableScript(string dbName, string tableName)
         {
             TableScriptResource resource = new TableScriptResource(this._context, dbName, tableName, @Url);
             return Ok(resource);
         }
 
-        // POST: api/mssql/databases/{dbName}/{tableName}/script
+        // POST: api/mssql/databases/{dbName}/tables/{tableName}/script
         [HttpPost]
         public IActionResult Post([FromBody] string value)
         {
             return BadRequest();
         }
 
-        // PUT: api/mssql/databases/{dbName}/{tableName}/script
+        // PUT: api/mssql/databases/{dbName}/tables/{tableName}/script
         [HttpPut]
         public IActionResult Put([FromBody]string value)
         {
             return BadRequest();
         }
 
-        // DELETE: api/mssql/databases/{dbName}/{tableName}/script
+        // DELETE: api/mssql/databases/{dbName}/tables/{tableName}/script
         [HttpDelete]
         public IActionResult Delete()
         {

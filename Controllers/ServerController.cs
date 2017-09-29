@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathRoot)]
+    [Route("/api/mssql")]
     public class ServerController : Controller
     {
         private ServerContext _context;
@@ -20,8 +20,7 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET: api/mssql
-        [HttpGet]
-        [Route(Constants.ApiRoutePathRoot, Name = Constants.ApiRouteNameServer)]
+        [HttpGet(Name = Constants.ApiRouteNameServer)]
         public IActionResult Get()
         {
             var resource = new ServerResource(this._context, @Url);

@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathTableScript)]
+    [Route("/api/mssql/databases/{dbName}/tables/{tableName}/[controller]")]
     public class Top100RowsController : Controller
     {
         private ServerContext _context;
@@ -22,8 +22,7 @@ namespace MSSqlWebapi.Controllers
         // GET: api/mssql/databases/{dbName}/{tableName}/top100rows
         // GET: api/mssql/databases/AdventureworksLT/Orders/top100rows
         //
-        [HttpGet]
-        [Route(Constants.ApiRoutePathTableTop100Rows, Name = Constants.ApiRouteNameTableTop100Rows)]
+        [HttpGet(Name = Constants.ApiRouteNameTableTop100Rows)]
         public IActionResult GetTableScript(string dbName, string tableName)
         {
             Top100RowsResource resource = new Top100RowsResource(this._context, dbName, tableName, @Url);

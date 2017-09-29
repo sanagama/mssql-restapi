@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathDatabases)]
+    [Route("/api/mssql/[controller]")]
     public class DatabasesController : Controller
     {
         private ServerContext _context;
@@ -20,8 +20,7 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET: api/mssql/databases
-        [HttpGet]
-        [Route(Constants.ApiRoutePathDatabases, Name = Constants.ApiRouteNameDatabases)]
+        [HttpGet(Name = Constants.ApiRouteNameDatabases)]
         public IActionResult GetDatabases()
         {
             // Project a list of DatabaseResource objects
@@ -35,8 +34,7 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET: api/mssql/databases/AdventureworksLT
-        [HttpGet]
-        [Route(Constants.ApiRoutePathDatabase, Name = Constants.ApiRouteNameDatabase)]
+        [HttpGet("{dbName}", Name = Constants.ApiRouteNameDatabase)]
         public IActionResult GetDatabase(string dbName)
         {
             SMO.Database smoDb = this._context.SmoServer.Databases[dbName];

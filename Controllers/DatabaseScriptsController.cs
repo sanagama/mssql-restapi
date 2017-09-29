@@ -9,7 +9,8 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathDatabaseScript)]
+    //[Route(Constants.ApiRoutePathDatabaseScript)]
+    [Route("/api/mssql/databases/{dbName}/script")]
     public class DatabaseScriptsController : Controller
     {
         private ServerContext _context;
@@ -23,8 +24,7 @@ namespace MSSqlWebapi.Controllers
         // GET: api/mssql/{dbName}/script
         // GET: api/mssql/databases/AdventureworksLT/script
         //
-        [HttpGet]
-        [Route(Constants.ApiRoutePathDatabaseScript, Name = Constants.ApiRouteNameDatabaseScript)]
+        [HttpGet(Name = Constants.ApiRouteNameDatabaseScript)]
         public IActionResult GetDatabaseScript(string dbName)
         {
             DatabaseScriptResource resource = new DatabaseScriptResource(this._context, dbName, @Url);

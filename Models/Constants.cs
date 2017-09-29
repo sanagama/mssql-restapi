@@ -7,35 +7,16 @@ namespace MSSqlWebapi.Models
 
         public const string ApiRoutePathRoot = "/api/mssql";
         public const string ApiRouteNameServer = "Server";
-
-        public const string ApiRouteNameDatabases = "databases";
-        public const string ApiRoutePathDatabases = Constants.ApiRoutePathRoot + "/" + Constants.ApiRouteNameDatabases;
-
         public const string ApiRouteNameDatabase = "database";
-        public const string ApiRoutePathDatabase = Constants.ApiRoutePathDatabases + "/{dbName}";
-
+        public const string ApiRouteNameDatabases = "databases";
         public const string ApiRouteNameScript = "script";
-        public const string ApiRouteNameDatabaseScript = "db" + Constants.ApiRouteNameScript;
-        public const string ApiRoutePathDatabaseScript = Constants.ApiRoutePathDatabase + "/" + Constants.ApiRouteNameScript;
-
-        public const string ApiRouteNameTables = "tables";
-        public const string ApiRoutePathTables = Constants.ApiRoutePathDatabase + "/" + Constants.ApiRouteNameTables;
-
+        public const string ApiRouteNameDatabaseScript = "dbscript";
         public const string ApiRouteNameTable = "table";
-        public const string ApiRoutePathTable = Constants.ApiRoutePathTables + "/{tableName}";
-
-        public const string ApiRouteNameTableScript = Constants.ApiRouteNameTable + Constants.ApiRouteNameScript;
-        public const string ApiRoutePathTableScript = Constants.ApiRoutePathTable + "/" + Constants.ApiRouteNameScript;
-        
-        public const string ApiRouteNameTableColumns = "columns";
-        public const string ApiRoutePathTableColumns = Constants.ApiRoutePathTable + "/" + Constants.ApiRouteNameTableColumns;
-
+        public const string ApiRouteNameTables = "tables";
+        public const string ApiRouteNameTableScript = "tablescript";
         public const string ApiRouteNameTableColumn = "column";
-        public const string ApiRoutePathTableColumn = Constants.ApiRoutePathTableColumns + "/{columnName}";
-
+        public const string ApiRouteNameTableColumns = "columns";
         public const string ApiRouteNameTableTop100Rows = "top100rows";
-        public const string ApiRoutePathTableTop100Rows = Constants.ApiRoutePathTable + "/" + Constants.ApiRouteNameTableTop100Rows;
-
 
         public const string MSSQLEnvVarHost = "MSSQL_HOST";
         public const string MSSQLEnvVarPort = "MSSQL_PORT";

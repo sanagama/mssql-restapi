@@ -9,7 +9,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(Constants.ApiRoutePathTables)]
+    [Route("/api/mssql/databases/{dbName}/[controller]")]
     public class TablesController : Controller
     {
         private ServerContext _context;
@@ -20,8 +20,7 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET: api/mssql/databases/AdventureworksLT/tables
-        [HttpGet]
-        [Route(Constants.ApiRoutePathTables, Name = Constants.ApiRouteNameTables)]
+        [HttpGet(Name = Constants.ApiRouteNameTables)]
         public IActionResult GetTables(string dbName)
         {
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
@@ -41,8 +40,7 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET: api/mssql/databases/AdventureworksLT/tables/Product
-        [HttpGet]
-        [Route(Constants.ApiRoutePathTable, Name = Constants.ApiRouteNameTable)]
+        [HttpGet("{tableName}", Name = Constants.ApiRouteNameTable)]
         public IActionResult GetTable(string dbName, string tableName)
         {
             SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
