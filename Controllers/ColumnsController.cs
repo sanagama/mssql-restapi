@@ -36,6 +36,7 @@ namespace MSSqlWebapi.Controllers
             }
 
             // Project a list of ColumnResource objects
+            smoTable.Columns.Refresh();
             List<ColumnResource> resources = new List<ColumnResource>();
             foreach(SMO.Column smoColumn in smoTable.Columns)
             {

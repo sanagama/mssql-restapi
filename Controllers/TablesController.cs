@@ -30,7 +30,7 @@ namespace MSSqlWebapi.Controllers
             }
 
             // Project a list of TableResource objects
-            smoDb.Refresh();
+            smoDb.Tables.Refresh();
             List<TableResource> resources = new List<TableResource>();
             foreach(SMO.Table smoTable in smoDb.Tables)
             {
@@ -50,6 +50,7 @@ namespace MSSqlWebapi.Controllers
                 return NotFound();
             }
 
+            smoDb.Tables.Refresh();
             SMO.Table smoTable = smoDb.Tables[tableName];
             if(smoTable == null)
             {

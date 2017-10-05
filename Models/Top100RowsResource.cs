@@ -48,7 +48,11 @@ namespace MSSqlWebapi.Models
                 }
 
                 // fetch top 100 rows from table
-                string sqlQuery = String.Format("SELECT TOP 100 * FROM {0} WITH(NOLOCK)", smoTable.Name);
+                int rowCount = 100;
+                string sqlQuery = String.Format("SELECT TOP {0} * FROM [{1}].[{2}] WITH(NOLOCK)",
+                        rowCount, smoTable.Schema, smoTable.Name);
+                Log.Information("Database: {0}. Running SMO ExecuteWithResults: {1}", smoDb.Name, sqlQuery);
+
                 using(DataSet dataset = smoDb.ExecuteWithResults(sqlQuery))
                 {
                     if ((dataset != null) && (dataset.Tables.Count > 0) && (dataset.Tables[0].Rows.Count > 0))

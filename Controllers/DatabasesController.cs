@@ -24,7 +24,7 @@ namespace MSSqlWebapi.Controllers
         public IActionResult GetDatabases()
         {
             // Project a list of DatabaseResource objects
-            this._context.SmoServer.Refresh();
+            this._context.SmoServer.Databases.Refresh();
             List<DatabaseResource> resources = new List<DatabaseResource>();
             foreach(SMO.Database smoDb in this._context.SmoServer.Databases)
             {

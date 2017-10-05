@@ -4,6 +4,7 @@ using SMO = Microsoft.SqlServer.Management.Smo;
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using Serilog;
 using Serilog.Events;
+using System.Collections.Specialized;
 
 namespace MSSqlWebapi.Models
 {
@@ -33,17 +34,12 @@ namespace MSSqlWebapi.Models
                         "Database {0} not found. No T-SQL script generated.",
                         this._dbName);
                     Log.Warning(this._scriptBody);
+                    return;
                 }
-                else
-                {
-                    var generatedScript = String.Empty;
-                    var scripter = new SMO.Scripter(this._context.SmoServer);
-                    var options = new SMO.ScriptingOptions { ScriptSchema = true };
-                    var scripts = smoDb.Script(options);
-                    foreach (var script in scripts)
-                        generatedScript += script;
-                    this._scriptBody = generatedScript;
-                }
+
+                StringCollection scripts = smoDb.Script();
+                foreach (var script in scripts)
+                    this._scriptBody += script;
             }
             catch(Exception e)
             {

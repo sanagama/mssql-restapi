@@ -4,6 +4,7 @@ using SMO = Microsoft.SqlServer.Management.Smo;
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using Serilog;
 using Serilog.Events;
+using System.Collections.Specialized;
 
 namespace MSSqlWebapi.Models
 {
@@ -35,28 +36,22 @@ namespace MSSqlWebapi.Models
                         "Database {0} not found. No T-SQL script generated.",
                         this._dbName);
                     Log.Warning(this._scriptBody);
+                    return;
                 }
-                else
+
+                SMO.Table smoTable = smoDb.Tables[this._tableName];
+                if(smoTable == null)
                 {
-                    SMO.Table smoTable = smoDb.Tables[this._tableName];
-                    if(smoTable == null)
-                    {
-                        this._scriptBody = String.Format(
-                            "Table {0} not found in Database {1}. No T-SQL script generated.",
-                            this._tableName, this._dbName);
-                        Log.Warning(this._scriptBody);
-                    }
-                    else
-                    {
-                        var generatedScript = "";
-                        var scripter = new SMO.Scripter(this._context.SmoServer);
-                        var options = new SMO.ScriptingOptions { ScriptSchema = true };
-                        var scripts = smoTable.Script(options);
-                        foreach (var script in scripts)
-                            generatedScript += script;
-                        this._scriptBody = generatedScript;
-                    }
+                    this._scriptBody = String.Format(
+                        "Table {0} not found in Database {1}. No T-SQL script generated.",
+                        this._tableName, this._dbName);
+                    Log.Warning(this._scriptBody);
+                    return;
                 }
+
+                StringCollection scripts = smoTable.Script();
+                foreach (var script in scripts)
+                    this._scriptBody += script;
             }
             catch(Exception e)
             {

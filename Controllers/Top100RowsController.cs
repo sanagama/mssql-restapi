@@ -18,12 +18,12 @@ namespace MSSqlWebapi.Controllers
             this._context = context;
         }
 
-        // Generate CREATE T-SQL script for Table
+        // Get Top 100 rows from table
         // GET: api/mssql/databases/{dbName}/{tableName}/top100rows
         // GET: api/mssql/databases/AdventureworksLT/Orders/top100rows
         //
         [HttpGet(Name = Constants.ApiRouteNameTableTop100Rows)]
-        public IActionResult GetTableScript(string dbName, string tableName)
+        public IActionResult GetTop100Rows(string dbName, string tableName)
         {
             Top100RowsResource resource = new Top100RowsResource(this._context, dbName, tableName, @Url);
             return Ok(resource);
