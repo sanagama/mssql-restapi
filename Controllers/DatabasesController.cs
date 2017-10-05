@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlWebapi.Models;
+using Serilog;
+using Serilog.Events;
 
 namespace MSSqlWebapi.Controllers
 {
@@ -41,6 +43,7 @@ namespace MSSqlWebapi.Controllers
             SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
+                Log.Warning("Database {0} not found.", dbName);
                 return NotFound();
             }
 

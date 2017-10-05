@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlWebapi.Models;
+using Serilog;
+using Serilog.Events;
 
 namespace MSSqlWebapi.Controllers
 {
@@ -26,12 +28,14 @@ namespace MSSqlWebapi.Controllers
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
+                Log.Warning("Database {0} not found. No Columns to display.", dbName);
                 return NotFound();
             }
 
             SMO.Table smoTable = smoDb.Tables[tableName];
             if (smoTable == null)
             {
+                Log.Warning("Table {0} not found in Database {1}. No Columns to display.", tableName, dbName);
                 return NotFound();
             }
 
@@ -53,18 +57,21 @@ namespace MSSqlWebapi.Controllers
             SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
+                Log.Warning("Database {0} not found. No Columns to display.", dbName);
                 return NotFound();
             }
 
             SMO.Table smoTable = smoDb.Tables[tableName];
             if(smoTable == null)
             {
+                Log.Warning("Table {0} not found in Database {1}. No Columns to display.", tableName, dbName);
                 return NotFound();
             }
 
             SMO.Column smoColumn = smoTable.Columns[columnName];
             if(smoColumn == null)
             {
+                Log.Warning("Column {0} not found in Table {1} in Database {2}.", columnName, tableName, dbName);
                 return NotFound();
             }
 

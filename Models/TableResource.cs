@@ -12,6 +12,7 @@ namespace MSSqlWebapi.Models
     {        
         public string Name { get { return this._smoTable.Name; } }
         public int Id { get { return this._smoTable.ID; } }
+        public string Schema { get { return this._smoTable.Schema; } }
         public DateTime CreateDate { get { return this._smoTable.CreateDate; } }
         public long RowCount { get { return this._smoTable.RowCount; } }
         public long ColumnCount { get { return this._smoTable.Columns.Count; } }
