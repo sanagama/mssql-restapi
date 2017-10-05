@@ -1,6 +1,6 @@
 version: "3"
 services:
-    web:
+    rest-api:
         build: .
         image: "sanagama/mssql-webapi"
         ports:
@@ -13,7 +13,7 @@ services:
           MSSQL_PASSWORD: "Yukon900"
         
     db:
-        image: "microsoft/mssql-server-linux"
+        image: "microsoft/mssql-server-linux:2017-GA"
         environment:
             SA_PASSWORD: "Yukon900"
             ACCEPT_EULA: "Y"
