@@ -17,6 +17,7 @@ namespace MSSqlWebapi.Models
         public DatabaseResource(SMO.Database smoDatabase, IUrlHelper urlHelper)
         {
             this._smoDatabase = smoDatabase;
+            this._smoDatabase.Refresh();
             this.UpdateLinks(urlHelper);
         }
 

@@ -16,12 +16,13 @@ namespace MSSqlWebapi.Models
         public string VersionString { get { return this.SmoServer.VersionString; } }
         
         public Uri Databases { get; set; }
-        private ServerContext _serverContext;
-        private SMO.Server SmoServer { get { return this._serverContext.SmoServer; } }
+        private ServerContext _context;
+        private SMO.Server SmoServer { get { return this._context.SmoServer; } }
 
-        public ServerResource(ServerContext serverContext, IUrlHelper urlHelper)
+        public ServerResource(ServerContext context, IUrlHelper urlHelper)
         {
-            this._serverContext = serverContext;
+            this._context = context;
+            this._context.SmoServer.Refresh();
             this.UpdateLinks(urlHelper);
         }
 
