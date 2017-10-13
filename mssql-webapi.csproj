@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="140.17199.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
@@ -12,7 +13,12 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   
-  <!-- Detect if we're running on OSX vs. Linux -->
+  <!-- Detect if we're running on Windows, OSX or Linux -->
+  <!-- Copied from answer at: https://github.com/Microsoft/msbuild/issues/539 -->
+  <PropertyGroup>
+    <IsWindows Condition="'$(OS)' == 'Windows_NT'">true</IsWindows>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Core'">
     <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
     <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
@@ -20,14 +26,8 @@
 
   <!-- Output detected OS -->
   <Target Name="PrintRID" BeforeTargets="Build">
+    <Message Text="IsWindows $(IsWindows)" Importance="high" />
     <Message Text="IsOSX $(IsOSX)" Importance="high" />
     <Message Text="IsLinux $(IsLinux)" Importance="high" />
   </Target>
-  
-  <!-- Include references to SMO .NET Core assemblies for OSX vs. Debian -->
-  <ItemGroup>
-    <Reference Include="./smo-dotnet-core/osx/*.dll" Condition="'$(IsOSX)' == 'true'" />
-    <Reference Include="./smo-dotnet-core/debian/*.dll" Condition="'$(IsLinux)' == 'true'" />
-  </ItemGroup>
-
 </Project>

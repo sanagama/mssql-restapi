@@ -25,6 +25,7 @@ namespace MSSqlWebapi.Controllers
         [HttpGet(Name = Constants.ApiRouteNameTableColumns)]
         public IActionResult GetColumns(string dbName, string tableName)
         {
+            // 
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
