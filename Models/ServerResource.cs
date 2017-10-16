@@ -30,15 +30,15 @@ namespace MSSqlWebapi.Models
         {
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameServer,   // Route
-                null,                           // route parameters
+                RouteNames.Root,    // Route
+                null,               // route parameters
                 urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
             ));
 
             this.Databases = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameDatabases,    // Route
-                null,                               // route parameters
+                RouteNames.Databases,   // Route
+                null,                   // route parameters
                 urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
             ));
         }

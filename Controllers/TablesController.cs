@@ -11,7 +11,7 @@ using Serilog.Events;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route("/api/mssql/databases/{dbName}/[controller]")]
+    [Route(RouteNames.Root + "/databases/{dbName}/tables")]
     public class TablesController : Controller
     {
         private ServerContext _context;
@@ -21,8 +21,9 @@ namespace MSSqlWebapi.Controllers
             this._context = context;
         }
 
+        // GET: api/mssql/databases/{dbName}/tables
         // GET: api/mssql/databases/AdventureworksLT/tables
-        [HttpGet(Name = Constants.ApiRouteNameTables)]
+        [HttpGet(Name = RouteNames.Tables)]
         public IActionResult GetTables(string dbName)
         {
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
@@ -37,55 +38,27 @@ namespace MSSqlWebapi.Controllers
             List<TableResource> resources = new List<TableResource>();
             foreach(SMO.Table smoTable in smoDb.Tables)
             {
-                TableResource resource = new TableResource(smoTable, @Url);
+                TableResource resource = new TableResource(this._context, dbName, smoTable.Name, @Url);
                 resources.Add(resource);
             }
             return Ok(resources);
         }
 
+        // GET: api/mssql/databases/{dbName}/tables/{tableName}
         // GET: api/mssql/databases/AdventureworksLT/tables/Product
-        [HttpGet("{tableName}", Name = Constants.ApiRouteNameTable)]
+        [HttpGet("{tableName}", Name = RouteNames.Table)]
         public IActionResult GetTable(string dbName, string tableName)
         {
-            SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
-            if (smoDb == null)
+            // Project a TableResource object by name
+            try
             {
-                Log.Warning("Database {0} not found. No Tables to display.", dbName);
+                return Ok(new TableResource(this._context, dbName, tableName, @Url));
+            }
+            catch(Exception e)
+            {
+                Log.Warning(e.Message);
                 return NotFound();
             }
-
-            smoDb.Tables.Refresh();
-            SMO.Table smoTable = smoDb.Tables[tableName];
-            if(smoTable == null)
-            {
-                Log.Warning("Table {0} not found in Database {1}.", tableName, dbName);
-                return NotFound();
-            }
-
-            // Project a TableResource object
-            TableResource resource = new TableResource(smoTable, @Url);
-            return Ok(resource);
-        }
-
-        // POST: api/mssql/databases/AdventureworksLT/tables
-        [HttpPost]
-        public IActionResult Post([FromBody] string value)
-        {
-            return BadRequest();
-        }
-
-        // PUT: api/mssql/databases/AdventureworksLT/tables/Product
-        [HttpPut]
-        public IActionResult Put([FromBody]string value)
-        {
-            return BadRequest();
-        }
-
-        // DELETE: api/mssql/databases/AdventureworksLT/tables/Product
-        [HttpDelete]
-        public IActionResult Delete()
-        {
-            return BadRequest();
         }
     }
 }

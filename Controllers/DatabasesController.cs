@@ -11,7 +11,8 @@ using Serilog.Events;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route("/api/mssql/[controller]")]
+    // See: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing
+    [Route(RouteNames.Root + "/databases")]
     public class DatabasesController : Controller
     {
         private ServerContext _context;
@@ -22,7 +23,7 @@ namespace MSSqlWebapi.Controllers
         }
 
         // GET: api/mssql/databases
-        [HttpGet(Name = Constants.ApiRouteNameDatabases)]
+        [HttpGet(Name = RouteNames.Databases)]
         public IActionResult GetDatabases()
         {
             // Project a list of DatabaseResource objects
@@ -30,47 +31,26 @@ namespace MSSqlWebapi.Controllers
             List<DatabaseResource> resources = new List<DatabaseResource>();
             foreach(SMO.Database smoDb in this._context.SmoServer.Databases)
             {
-                var resource = new DatabaseResource(smoDb, @Url);
+                var resource = new DatabaseResource(this._context, smoDb.Name, @Url);
                 resources.Add(resource);
             }
             return Ok(resources);
         }
 
         // GET: api/mssql/databases/AdventureworksLT
-        [HttpGet("{dbName}", Name = Constants.ApiRouteNameDatabase)]
+        [HttpGet("{dbName}", Name = RouteNames.Database)]
         public IActionResult GetDatabase(string dbName)
         {
-            SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
-            if (smoDb == null)
+            // Project a DatabaseResource object by name
+            try
             {
-                Log.Warning("Database {0} not found.", dbName);
+                return Ok(new DatabaseResource(this._context, dbName, @Url));
+            }
+            catch(Exception e)
+            {
+                Log.Warning(e.Message);
                 return NotFound();
             }
-
-            // Project a DatabaseResource object
-            var resource = new DatabaseResource(smoDb, @Url);
-            return Ok(resource);
-        }
-
-        // POST: api/mssql/databases
-        [HttpPost]
-        public IActionResult Post([FromBody] string value)
-        {
-            return BadRequest();
-        }
-
-        // PUT: api/mssql/databases/AdventureworksLT
-        [HttpPut]
-        public IActionResult Put([FromBody]string value)
-        {
-            return BadRequest();
-        }
-
-        // DELETE: api/mssql/databases/AdventureworksLT
-        [HttpDelete]
-        public IActionResult Delete()
-        {
-            return BadRequest();
         }
     }
 }

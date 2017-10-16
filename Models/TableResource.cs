@@ -19,22 +19,44 @@ namespace MSSqlWebapi.Models
         public Uri Script { get; set; }
         public Uri Columns { get; set; }
         public Uri Top100Rows { get; set; }
+        private ServerContext _context;
         private SMO.Table _smoTable;
-        public TableResource(SMO.Table smoTable, IUrlHelper urlHelper)
+        private SMO.Server SmoServer { get { return this._context.SmoServer; } }        
+        private SMO.Table SmoTable { get { return this._smoTable; } }        
+        
+        public TableResource(ServerContext context, string dbName, string tableName, IUrlHelper urlHelper)
         {
-            this._smoTable = smoTable;
+            this._context = context;
+
+            // Get database by name
+            this.SmoServer.Databases.Refresh();
+            SMO.Database smoDb = this.SmoServer.Databases[dbName];
+            if (smoDb == null)
+            {
+                throw new SMO.SmoException(String.Format("Database {0} not found.", dbName));
+            }
+
+            // Get table by name
+            smoDb.Tables.Refresh();
+            this._smoTable = smoDb.Tables[tableName];
+            if(this._smoTable == null)
+            {
+                throw new SMO.SmoException(String.Format("Table {0} not found in Database {1}.", tableName, dbName));
+            }
+            
             this.UpdateLinks(urlHelper);
         }
+        
         public override void UpdateLinks(IUrlHelper urlHelper)
         {
             // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTable,
+                RouteNames.Table,
                 new
                 {
-                    dbName = this._smoTable.Parent.Name,
-                    tableName = this._smoTable.Name
+                    dbName = this.SmoTable.Parent.Name,
+                    tableName = this.SmoTable.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
             ));
@@ -42,19 +64,19 @@ namespace MSSqlWebapi.Models
             // parent
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameDatabase,
-                new { dbName = this._smoTable.Parent.Name },
+                RouteNames.Database,
+                new { dbName = this.SmoTable.Parent.Name },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 
             // script
             this.Script = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTableScript,
+                RouteNames.TableScript,
                 new
                 {
-                    dbName = this._smoTable.Parent.Name,
-                    tableName = this._smoTable.Name
+                    dbName = this.SmoTable.Parent.Name,
+                    tableName = this.SmoTable.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -62,11 +84,11 @@ namespace MSSqlWebapi.Models
             // columns
             this.Columns = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTableColumns,
+                RouteNames.TableColumns,
                 new
                 {
-                    dbName = this._smoTable.Parent.Name,
-                    tableName = this._smoTable.Name
+                    dbName = this.SmoTable.Parent.Name,
+                    tableName = this.SmoTable.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -74,11 +96,11 @@ namespace MSSqlWebapi.Models
             // top 100 rows
             this.Top100Rows = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTableTop100Rows,
+                RouteNames.TableTop100Rows,
                 new
                 {
-                    dbName = this._smoTable.Parent.Name,
-                    tableName = this._smoTable.Name
+                    dbName = this.SmoTable.Parent.Name,
+                    tableName = this.SmoTable.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));

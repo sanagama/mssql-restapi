@@ -44,7 +44,7 @@ namespace MSSqlWebapi.Models
             catch(Exception e)
             {
                 this._scriptBody = String.Format(
-                    "Error while generating script for database {0}\n\n{1}",
+                    "Error generating script for database {0}\n\n{1}",
                     this._dbName, e.ToString());
                 Log.Error(this._scriptBody);
             }
@@ -54,7 +54,7 @@ namespace MSSqlWebapi.Models
             // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameDatabaseScript,
+                RouteNames.DatabaseScript,
                 new { dbName = this._dbName },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -62,7 +62,7 @@ namespace MSSqlWebapi.Models
             // parent
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameDatabase,
+                RouteNames.Database,
                 new { dbName = this._dbName },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));

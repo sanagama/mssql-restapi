@@ -85,7 +85,7 @@ namespace MSSqlWebapi.Models
             // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTableTop100Rows,
+                RouteNames.TableTop100Rows,
                 new
                 {
                     dbName = this._dbName,
@@ -97,7 +97,7 @@ namespace MSSqlWebapi.Models
             // parent
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTable,
+                RouteNames.Table,
                 new
                 {
                     dbName = this._dbName,

@@ -16,11 +16,39 @@ namespace MSSqlWebapi.Models
         private SMO.Column _smoColumn;
         private SMO.SqlSmoObject _parent;
         private SMO.Table _smoTable;
-        public ColumnResource(SMO.Column smoColumn, IUrlHelper urlHelper)
+        private ServerContext _context;
+        private SMO.Server SmoServer { get { return this._context.SmoServer; } }        
+
+        public ColumnResource(ServerContext context, string dbName, string tableName, string columnName, IUrlHelper urlHelper)
         {
-            this._smoColumn = smoColumn;
+            this._context = context;
+
+            // Get database by name
+            this.SmoServer.Databases.Refresh();
+            SMO.Database smoDb = this.SmoServer.Databases[dbName];
+            if (smoDb == null)
+            {
+                throw new SMO.SmoException(String.Format("Database {0} not found.", dbName));
+            }
+
+            // Get table by name
+            smoDb.Tables.Refresh();
+            SMO.Table smoTable = smoDb.Tables[tableName];
+            if(smoTable == null)
+            {
+                throw new SMO.SmoException(String.Format("Table {0} not found in Database {1}.", tableName, dbName));
+            }
+
+            // Get column by name
+            smoTable.Columns.Refresh();
+            this._smoColumn = smoTable.Columns[columnName];
+            if(this._smoColumn == null)
+            {
+                throw new SMO.SmoException(String.Format("Column {0} not found in Table {1} not found in Database {2}.", columnName, tableName, dbName));
+            }
+            
             this._parent = this._smoColumn.Parent;
-            this._smoTable = (SMO.Table) this._parent;  // TBD: only handling Table for now
+            this._smoTable = (SMO.Table) this._parent;  // TODO: handle other types of parents (only handling Table for now)
             this.UpdateLinks(urlHelper);
         }
 
@@ -29,7 +57,7 @@ namespace MSSqlWebapi.Models
             // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTableColumn,
+                RouteNames.TableColumn,
                 new
                 {
                     dbName = this._smoTable.Parent.Name,
@@ -42,7 +70,7 @@ namespace MSSqlWebapi.Models
             // parent
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
-                Constants.ApiRouteNameTable,
+                RouteNames.Table,
                 new
                 {
                     dbName = this._smoTable.Parent.Name,
