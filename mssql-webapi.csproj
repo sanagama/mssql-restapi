@@ -7,7 +7,6 @@
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="140.17199.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
   </ItemGroup>
   
   <!-- Detect if we're running on Windows, OSX or Linux -->
