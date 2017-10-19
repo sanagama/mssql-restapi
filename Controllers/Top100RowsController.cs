@@ -4,7 +4,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(RouteNames.Root + "/databases/{dbName}/tables/{tableName}/top100rows")]
+    [Route(Constants.RoutePathRoot + "/databases/{dbName}/tables/{schemaName}/{tableName}/top100rows")]
     public class Top100RowsController : Controller
     {
         private ServerContext _context;
@@ -14,13 +14,13 @@ namespace MSSqlWebapi.Controllers
         }
 
         // Get Top 100 rows from table
-        // GET: api/mssql/databases/{dbName}/tables/{tableName}/Orders/top100rows
-        // GET: api/mssql/databases/AdventureworksLT/tables/Orders/top100rows
+        // GET: api/mssql/databases/{dbName}/tables/{schemaName}/{tableName}/Orders/top100rows
+        // GET: api/mssql/databases/AdventureworksLT/tables/SalesLT/Orders/top100rows
         //
         [HttpGet(Name = RouteNames.TableTop100Rows)]
-        public IActionResult GetTop100Rows(string dbName, string tableName)
+        public IActionResult GetTop100Rows(string dbName, string schemaName, string tableName)
         {
-            return Ok(new Top100RowsResource(this._context, dbName, tableName, @Url));
+            return Ok(new Top100RowsResource(this._context, dbName, schemaName, tableName, @Url));
         }
     }
 }

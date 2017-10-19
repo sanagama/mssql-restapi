@@ -4,7 +4,7 @@ using MSSqlWebapi.Models;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(RouteNames.Root)]
+    [Route(Constants.RoutePathRoot)]
     public class ServerController : Controller
     {
         private ServerContext _context;

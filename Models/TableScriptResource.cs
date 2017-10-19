@@ -14,11 +14,13 @@ namespace MSSqlWebapi.Models
         public string ScriptBody { get { return this._scriptBody; } }
         private ServerContext _context;
         private string _dbName;
+        private string _schemaName;
         private string _tableName;
-        public TableScriptResource(ServerContext context, string dbName, string tableName, IUrlHelper urlHelper)
+        public TableScriptResource(ServerContext context, string dbName, string schemaName, string tableName, IUrlHelper urlHelper)
         {
             this._context = context;
             this._dbName = dbName;
+            this._schemaName = schemaName;
             this._tableName = tableName;
             this.UpdateLinks(urlHelper);
             this.GenerateScript();
@@ -33,18 +35,18 @@ namespace MSSqlWebapi.Models
                 if (smoDb == null)
                 {
                     this._scriptBody = String.Format(
-                        "Database {0} not found. No T-SQL script generated.",
+                        "Database '{0}' not found. No T-SQL script generated.",
                         this._dbName);
                     Log.Warning(this._scriptBody);
                     return;
                 }
 
-                SMO.Table smoTable = smoDb.Tables[this._tableName];
+                SMO.Table smoTable = smoDb.Tables[this._tableName, this._schemaName];
                 if(smoTable == null)
                 {
                     this._scriptBody = String.Format(
-                        "Table {0} not found in Database {1}. No T-SQL script generated.",
-                        this._tableName, this._dbName);
+                        "Table '{0}' not found in Schema '{1}' in Database {2}. No T-SQL script generated.",
+                        this._tableName, this._schemaName, this._dbName);
                     Log.Warning(this._scriptBody);
                     return;
                 }
@@ -56,8 +58,8 @@ namespace MSSqlWebapi.Models
             catch(Exception e)
             {
                 this._scriptBody = String.Format(
-                    "Error generating script for table {0} in database {1}\n\n{2}",
-                    this._tableName, this._dbName, e.ToString());
+                    "Error generating script for Table '{0}' in Schema '{1}' in Database '{2}'\n\n{3}",
+                    this._tableName, this._schemaName, this._dbName, e.ToString());
                 Log.Error(this._scriptBody);
             }
         }
@@ -71,6 +73,7 @@ namespace MSSqlWebapi.Models
                 new
                 {
                     dbName = this._dbName,
+                    schemaName = this._schemaName,
                     tableName = this._tableName
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
@@ -83,6 +86,7 @@ namespace MSSqlWebapi.Models
                 new
                 {
                     dbName = this._dbName,
+                    schemaName = this._schemaName,
                     tableName = this._tableName
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme

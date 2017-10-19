@@ -2,6 +2,7 @@ namespace MSSqlWebapi.Models
 {
     public static class Constants
     {
+        public const string RoutePathRoot = "/api/mssql";
         public const string LinkNameSelf = "self";
         public const string LinkNameParent = "parent";
         public const string MSSQLEnvVarHost = "MSSQL_HOST";

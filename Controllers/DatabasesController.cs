@@ -12,7 +12,7 @@ using Serilog.Events;
 namespace MSSqlWebapi.Controllers
 {
     // See: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing
-    [Route(RouteNames.Root + "/databases")]
+    [Route(Constants.RoutePathRoot + "/databases")]
     public class DatabasesController : Controller
     {
         private ServerContext _context;

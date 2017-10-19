@@ -12,6 +12,7 @@ namespace MSSqlWebapi.Models
     {        
         public string Name { get { return this._smoTable.Name; } }
         public int Id { get { return this._smoTable.ID; } }
+        public string ParentDatabase { get { return this._smoTable.Parent.Name; } }
         public string Schema { get { return this._smoTable.Schema; } }
         public DateTime CreateDate { get { return this._smoTable.CreateDate; } }
         public long RowCount { get { return this._smoTable.RowCount; } }
@@ -21,27 +22,26 @@ namespace MSSqlWebapi.Models
         public Uri Top100Rows { get; set; }
         private ServerContext _context;
         private SMO.Table _smoTable;
-        private SMO.Server SmoServer { get { return this._context.SmoServer; } }        
-        private SMO.Table SmoTable { get { return this._smoTable; } }        
         
-        public TableResource(ServerContext context, string dbName, string tableName, IUrlHelper urlHelper)
+        public TableResource(ServerContext context, string dbName, string schemaName, string tableName, IUrlHelper urlHelper)
         {
             this._context = context;
 
             // Get database by name
-            this.SmoServer.Databases.Refresh();
-            SMO.Database smoDb = this.SmoServer.Databases[dbName];
+            this._context.SmoServer.Databases.Refresh();
+            SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
-                throw new SMO.SmoException(String.Format("Database {0} not found.", dbName));
+                throw new SMO.SmoException(String.Format("Database '{0}' not found.", dbName));
             }
 
             // Get table by name
             smoDb.Tables.Refresh();
-            this._smoTable = smoDb.Tables[tableName];
+            this._smoTable = smoDb.Tables[tableName, schemaName];
             if(this._smoTable == null)
             {
-                throw new SMO.SmoException(String.Format("Table {0} not found in Database {1}.", tableName, dbName));
+                throw new SMO.SmoException(String.Format("Table '{0}' not found in Schema '{1}' in Database '{1}'.",
+                    tableName, schemaName, dbName));
             }
             
             this.UpdateLinks(urlHelper);
@@ -55,8 +55,9 @@ namespace MSSqlWebapi.Models
                 RouteNames.Table,
                 new
                 {
-                    dbName = this.SmoTable.Parent.Name,
-                    tableName = this.SmoTable.Name
+                    dbName = this.ParentDatabase,
+                    schemaName = this.Schema,
+                    tableName = this.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
             ));
@@ -65,7 +66,7 @@ namespace MSSqlWebapi.Models
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
                 RouteNames.Database,
-                new { dbName = this.SmoTable.Parent.Name },
+                new { dbName = this.ParentDatabase },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 
@@ -75,8 +76,9 @@ namespace MSSqlWebapi.Models
                 RouteNames.TableScript,
                 new
                 {
-                    dbName = this.SmoTable.Parent.Name,
-                    tableName = this.SmoTable.Name
+                    dbName = this.ParentDatabase,
+                    schemaName = this.Schema,
+                    tableName = this.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -87,8 +89,9 @@ namespace MSSqlWebapi.Models
                 RouteNames.TableColumns,
                 new
                 {
-                    dbName = this.SmoTable.Parent.Name,
-                    tableName = this.SmoTable.Name
+                    dbName = this.ParentDatabase,
+                    schemaName = this.Schema,
+                    tableName = this.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -99,8 +102,9 @@ namespace MSSqlWebapi.Models
                 RouteNames.TableTop100Rows,
                 new
                 {
-                    dbName = this.SmoTable.Parent.Name,
-                    tableName = this.SmoTable.Name
+                    dbName = this.ParentDatabase,
+                    schemaName = this.Schema,
+                    tableName = this.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));

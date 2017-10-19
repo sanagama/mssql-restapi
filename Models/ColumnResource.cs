@@ -17,26 +17,26 @@ namespace MSSqlWebapi.Models
         private SMO.SqlSmoObject _parent;
         private SMO.Table _smoTable;
         private ServerContext _context;
-        private SMO.Server SmoServer { get { return this._context.SmoServer; } }        
 
-        public ColumnResource(ServerContext context, string dbName, string tableName, string columnName, IUrlHelper urlHelper)
+        public ColumnResource(ServerContext context, string dbName, string schemaName, string tableName, string columnName, IUrlHelper urlHelper)
         {
             this._context = context;
 
             // Get database by name
-            this.SmoServer.Databases.Refresh();
-            SMO.Database smoDb = this.SmoServer.Databases[dbName];
+            this._context.SmoServer.Databases.Refresh();
+            SMO.Database smoDb = this._context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
-                throw new SMO.SmoException(String.Format("Database {0} not found.", dbName));
+                throw new SMO.SmoException(String.Format("Database '{0}' not found.", dbName));
             }
 
             // Get table by name
             smoDb.Tables.Refresh();
-            SMO.Table smoTable = smoDb.Tables[tableName];
+            SMO.Table smoTable = smoDb.Tables[tableName, schemaName];
             if(smoTable == null)
             {
-                throw new SMO.SmoException(String.Format("Table {0} not found in Database {1}.", tableName, dbName));
+                throw new SMO.SmoException(String.Format("Table '{0}' not found in Schema '{1}' in Database '{1}'.",
+                    tableName, schemaName, dbName));
             }
 
             // Get column by name
@@ -62,7 +62,8 @@ namespace MSSqlWebapi.Models
                 {
                     dbName = this._smoTable.Parent.Name,
                     tableName = this._smoTable.Name,
-                    columnName = this._smoColumn.Name
+                    schemaName = this._smoTable.Schema,
+                    columnName = this.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -74,6 +75,7 @@ namespace MSSqlWebapi.Models
                 new
                 {
                     dbName = this._smoTable.Parent.Name,
+                    schemaName = this._smoTable.Schema,
                     tableName = this._smoTable.Name
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme

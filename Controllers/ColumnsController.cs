@@ -11,7 +11,7 @@ using Serilog.Events;
 
 namespace MSSqlWebapi.Controllers
 {
-    [Route(RouteNames.Root + "/databases/{dbName}/tables/{tableName}/columns")]
+    [Route(Constants.RoutePathRoot + "/databases/{dbName}/tables/{schemaName}/{tableName}/columns")]
     public class ColumnsController : Controller
     {
         private ServerContext _context;
@@ -21,22 +21,22 @@ namespace MSSqlWebapi.Controllers
             this._context = context;
         }
 
-        // GET: api/mssql/databases/{dbName}/tables/{tableName}/columns
-        // GET: api/mssql/databases/AdventureworksLT/tables/Product/columns
+        // GET: api/mssql/databases/{dbName}/tables/{schemaName}/{tableName}/columns
+        // GET: api/mssql/databases/AdventureworksLT/tables/SalesLT/Product/columns
         [HttpGet(Name = RouteNames.TableColumns)]
-        public IActionResult GetColumns(string dbName, string tableName)
+        public IActionResult GetColumns(string dbName, string schemaName, string tableName)
         {
             SMO.Database smoDb = _context.SmoServer.Databases[dbName];
             if (smoDb == null)
             {
-                Log.Warning("Database {0} not found. No Columns to display.", dbName);
+                Log.Warning("Database '{0}' not found. No Columns to display.", dbName);
                 return NotFound();
             }
 
-            SMO.Table smoTable = smoDb.Tables[tableName];
+            SMO.Table smoTable = smoDb.Tables[tableName, schemaName];
             if (smoTable == null)
             {
-                Log.Warning("Table {0} not found in Database {1}. No Columns to display.", tableName, dbName);
+                Log.Warning("Table '{0}' not found in Schema '{1}' in Database {2}. No Columns to display.", tableName, schemaName, dbName);
                 return NotFound();
             }
 
@@ -45,21 +45,20 @@ namespace MSSqlWebapi.Controllers
             List<ColumnResource> resources = new List<ColumnResource>();
             foreach(SMO.Column smoColumn in smoTable.Columns)
             {
-                ColumnResource resource = new ColumnResource(this._context, dbName, tableName, smoColumn.Name, @Url);
-                resources.Add(resource);
+                resources.Add(new ColumnResource(this._context, dbName, schemaName, tableName, smoColumn.Name, @Url));
             }
             return Ok(resources);
         }
 
-        // GET: api/mssql/databases/{dbName}/tables/{tableName}/columns/{columnName}
-        // GET: api/mssql/databases/AdventureworksLT/tables/Product/columns/{columnName}
+        // GET: api/mssql/databases/{dbName}/tables/{schemaName}/{tableName}/columns/{columnName}
+        // GET: api/mssql/databases/AdventureworksLT/tables/SalesLT/Product/columns/{columnName}
         [HttpGet("{columnName}", Name = RouteNames.TableColumn)]
-        public IActionResult GetColumn(string dbName, string tableName, string columnName)
+        public IActionResult GetColumn(string dbName, string schemaName, string tableName, string columnName)
         {
             // Project a ColumnResource object by name
             try
             {
-                return Ok(new ColumnResource(this._context, dbName, tableName, columnName, @Url));
+                return Ok(new ColumnResource(this._context, dbName, schemaName, tableName, columnName, @Url));
             }
             catch(Exception e)
             {

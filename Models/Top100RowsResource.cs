@@ -13,14 +13,16 @@ namespace MSSqlWebapi.Models
     {
         private ServerContext _context;
         private string _dbName;
+        private string _schemaName;
         private string _tableName;
         private List<Dictionary<string, string>> _top100Rows;
         public List<Dictionary<string, string>> Top100Rows { get { return this._top100Rows; } }
         
-        public Top100RowsResource(ServerContext context, string dbName, string tableName, IUrlHelper urlHelper)
+        public Top100RowsResource(ServerContext context, string dbName, string schemaName, string tableName, IUrlHelper urlHelper)
         {
             this._context = context;
             this._dbName = dbName;
+            this._schemaName = schemaName;
             this._tableName = tableName;
             this.UpdateLinks(urlHelper);
             this.GetTop100Rows();
@@ -28,6 +30,8 @@ namespace MSSqlWebapi.Models
 
         private void GetTop100Rows()
         {
+            int rowCount = 100;
+            string sqlQuery = string.Empty;
             try
             {
                 this._top100Rows = new List<Dictionary<string, string>>();
@@ -35,23 +39,23 @@ namespace MSSqlWebapi.Models
                 SMO.Database smoDb = _context.SmoServer.Databases[this._dbName];
                 if (smoDb == null)
                 {
-                    Log.Warning("Database {0} not found. No Rows to display.", this._dbName);
+                    Log.Warning("Database '{0}' not found. No Rows to display.", this._dbName);
                     return;
                 }
 
-                SMO.Table smoTable = smoDb.Tables[this._tableName];
+                SMO.Table smoTable = smoDb.Tables[this._tableName, this._schemaName];
                 if(smoTable == null)
                 {
-                    Log.Warning("Table {0} not found in Database {1}. No Rows to display.",
-                        this._tableName, this._dbName);
+                    Log.Warning("Table '{0}' not found in Schema '{1}' in Database '{2}'. No Rows to display.",
+                        this._tableName, this._schemaName, this._dbName);
                     return;
                 }
 
                 // fetch top 100 rows from table
-                int rowCount = 100;
-                string sqlQuery = String.Format("SELECT TOP {0} * FROM [{1}].[{2}] WITH(NOLOCK)",
+                sqlQuery = String.Format("SELECT TOP {0} * FROM [{1}].[{2}] WITH(NOLOCK)",
                         rowCount, smoTable.Schema, smoTable.Name);
-                Log.Information("Database: {0}. Running SMO ExecuteWithResults: {1}", smoDb.Name, sqlQuery);
+                Log.Information("Database: {0}, Schema: {1}, Table: {2}. Running SMO ExecuteWithResults: {3}",
+                    smoDb.Name, smoTable.Schema, smoTable.Name, sqlQuery);
 
                 using(DataSet dataset = smoDb.ExecuteWithResults(sqlQuery))
                 {
@@ -75,8 +79,7 @@ namespace MSSqlWebapi.Models
             }
             catch(Exception e)
             {
-                Log.Error("Error while generating script for table {0} in database {1}\n\n{2}",
-                    this._tableName, this._dbName, e.ToString());
+                Log.Error("Error running query: {0}\n\n{1}", sqlQuery, e.ToString());
             }
         }
 
@@ -89,6 +92,7 @@ namespace MSSqlWebapi.Models
                 new
                 {
                     dbName = this._dbName,
+                    schemaName = this._schemaName,
                     tableName = this._tableName
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
@@ -101,6 +105,7 @@ namespace MSSqlWebapi.Models
                 new
                 {
                     dbName = this._dbName,
+                    schemaName = this._schemaName,
                     tableName = this._tableName
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme

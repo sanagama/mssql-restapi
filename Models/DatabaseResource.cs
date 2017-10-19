@@ -10,24 +10,22 @@ namespace MSSqlWebapi.Models
 {
     public sealed class DatabaseResource : Resource
     {
-        public string Name { get { return this.SmoDatabase.Name; } }
-        public int Id { get { return this.SmoDatabase.ID; } }
-        public DateTime CreateDate { get { return this.SmoDatabase.CreateDate; } }
-        public int TableCount { get { return this.SmoDatabase.Tables.Count; } }
-        public int ViewCount { get { return this.SmoDatabase.Views.Count; } }
+        public string Name { get { return this._smoDatabase.Name; } }
+        public int Id { get { return this._smoDatabase.ID; } }
+        public DateTime CreateDate { get { return this._smoDatabase.CreateDate; } }
+        public int TableCount { get { return this._smoDatabase.Tables.Count; } }
+        public int ViewCount { get { return this._smoDatabase.Views.Count; } }
         public Uri Script { get; set; }
         public Uri Tables { get; set; }
         private ServerContext _context;
         private SMO.Database _smoDatabase;
-        private SMO.Server SmoServer { get { return this._context.SmoServer; } }        
-        private SMO.Database SmoDatabase { get { return this._smoDatabase; } }        
         public DatabaseResource(ServerContext context, string dbName, IUrlHelper urlHelper)
         {
             this._context = context;
 
             // Get database by name
-            this.SmoServer.Databases.Refresh();
-            this._smoDatabase = this.SmoServer.Databases[dbName];
+            this._context.SmoServer.Databases.Refresh();
+            this._smoDatabase = this._context.SmoServer.Databases[dbName];
             if (this._smoDatabase == null)
             {
                 throw new SMO.SmoException(String.Format("Database {0} not found", dbName));
@@ -49,7 +47,7 @@ namespace MSSqlWebapi.Models
             // parent
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
-                RouteNames.Root,    // Route
+                RouteNames.Server,  // Route
                 null,               // route parameters
                 urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
             ));

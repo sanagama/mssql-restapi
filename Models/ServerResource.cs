@@ -28,13 +28,15 @@ namespace MSSqlWebapi.Models
 
         public override void UpdateLinks(IUrlHelper urlHelper)
         {
+            // self
             base.links[Constants.LinkNameSelf] = new Uri(
                 urlHelper.RouteUrl(
-                RouteNames.Root,    // Route
+                RouteNames.Server,  // Route
                 null,               // route parameters
                 urlHelper.ActionContext.HttpContext.Request.Scheme   // scheme
             ));
 
+            // databases
             this.Databases = new Uri(
                 urlHelper.RouteUrl(
                 RouteNames.Databases,   // Route
