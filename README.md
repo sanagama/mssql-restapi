@@ -16,18 +16,18 @@ The instructions below are for a MacBook with SQL Server 2017 running in Docker.
 
 ### 1. Prerequisites
 
-1. Download and install Docker for your operating system: <https://www.docker.com>
-1. Increase Docker memory to 4 GB to run SQL Server 2017 as documented [here](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker#requirements)
-1. Download and install .NET Core for your operating system: <https://www.microsoft.com/net/core>
+- Download and install Docker for your operating system: <https://www.docker.com>
+- Increase Docker memory to 4 GB to run SQL Server 2017 as documented [here](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker#requirements)
+- Download and install .NET Core for your operating system: <https://www.microsoft.com/net/core>
 
 ### 2. Get the source code
 
 > *TIP:* If you have ```Git``` installed then you can do ```git clone https://github.com/sanagama/mssql-restapi.git``` instead of downloading and extracting the ZIP file as described below.
 
-1. Browse to <https://github.com/sanagama/mssql-restapi>
-1. Click ```Clone or Download``` then click ```Download ZIP```
-1. Save the ZIP file to your ```HOME``` directory as ```~/mssql-restapi.zip```
-1. Extract the zip file to your ```HOME``` directory ```~/mssql-restapi```
+- Browse to <https://github.com/sanagama/mssql-restapi>
+- Click ```Clone or Download``` then click ```Download ZIP```
+- Save the ZIP file to your ```HOME``` directory as ```~/mssql-restapi.zip```
+- Extract the zip file to your ```HOME``` directory ```~/mssql-restapi```
 
 ### 3. Run SQL Server 2017 in Docker
 
@@ -62,5 +62,5 @@ dotnet run
 
 > *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) Chrome extension is a great way to play with REST APIs.
 
-1. Launch a browser and browse to <http://localhost:5000/api/mssql>
-1. Click on the links in the JSON response to navigate database objects.
+- Launch a browser and browse to <http://localhost:5000/api/mssql>
+- Click on the links in the JSON response to navigate database objects.
