@@ -2,7 +2,7 @@
 
 This is a prototype of a simple REST API that uses SMO on .NET Core to connect to SQL running anywhere.
 
-As you probably heard, [SQL Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) is now available on .NET Core. This means developers can use the nifty SMO APIs in client apps on Linux, macOS and Windows to programmatically manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
+As you probably heard, [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) is now available on .NET Core. This means developers can use the nifty SMO APIs in client apps on Linux, macOS and Windows to programmatically manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
