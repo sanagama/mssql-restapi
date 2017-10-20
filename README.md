@@ -2,7 +2,7 @@
 
 This *prototype* is a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs under the covers to connect to a SQL Server instance running anywhere.
 
-You can optionally configure the SQL Server instance to connect to via environment variables. The prototype connects to SQL, dynamically discovers instance data & metadata, and provides a RESTful interface to browse the Server, Databases, Tables & Columns. For fun, it also has a REST end-point to generate CREATE T-SQL scripts for an existing Database or Table. The prototype is built using .NET Core 2.0 and can run on Linux, macOS, Windows and in Docker.
+You can optionally configure the SQL Server instance to connect to via environment variables. The prototype connects to SQL, dynamically discovers instance data & metadata, and provides a RESTful interface to browse the Server, Databases, Tables & Columns. For fun, it also has a REST end-point to generate ```CREATE T-SQL``` scripts for an existing Database or Table. The prototype is built using .NET Core 2.0 and can run on Linux, macOS, Windows and in Docker.
 
 As you probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
