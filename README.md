@@ -22,7 +22,7 @@ The instructions below are for a MacBook with SQL Server 2017 running in Docker.
 
 ### 2. Get the source code
 
-> *TIP:* If you have ```Git``` installed then you can do ```git clone https://github.com/sanagama/mssql-restapi.git``` 
+> *TIP:* If you have ```Git``` installed then you can do ```git clone https://github.com/sanagama/mssql-restapi.git``` instead.
 
 1. Browse to <https://github.com/sanagama/mssql-restapi>
 1. Click ```Clone or Download``` then click ```Download ZIP```
