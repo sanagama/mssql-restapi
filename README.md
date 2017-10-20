@@ -8,7 +8,7 @@ Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https
 
 The REST API in this prototype is an [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs under the covers to dynamically discover and browse data and metadata for SQL Server running anywhere. It also has a REST end-point that uses the SMO APIs to generate CREATE scripts for databases and tables.
 
-Currently, the prototype only implements the ```GET``` verb. Other verbs (```PUT``` ```POST``` and ```DELETE```) are coming soon.
+Currently, the prototype only implements the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
 
 ## Try it out!
 
