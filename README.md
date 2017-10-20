@@ -45,9 +45,9 @@ cat ./scripts/2-docker-create-db.sh
 ./scripts/2-docker-create-db.sh
 ```
 
-### 4. Run the Web API app
+### 4. Launch the REST API middle-tier
 
-Type the following commands in the ```Terminal``` window to start the ASP.NET Core REST API web app:
+Type the following commands in the ```Terminal``` window to launch the REST API:
 
 ```bash
 cd ~/mssql-restapi
