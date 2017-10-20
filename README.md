@@ -58,7 +58,7 @@ dotnet run
 
 ### 5. Play with the REST API
 
-> *TIP:* I use [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) Chrome extension to play with the REST API.
+> *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) Chrome extension is a great way to play with the REST APIs.
 
 1. Launch a browser and browse to <http://localhost:5000/api/mssql>
 1. Click on the links in the JSON response to navigate database objects.
