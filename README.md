@@ -1,12 +1,12 @@
 # What's here?
 
-This is a prototype of a simple REST API that uses SMO on .NET Core to connect to SQL running anywhere.
+This is a prototype of a simple REST API middle-tier that uses SMO on .NET Core 2.0 to connect to SQL running anywhere and lets you dynamically browse Server, Database and Table data and metadata.
 
-As you probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core. This means developers and system administrators can use the nifty SMO APIs in client apps or PowerShell on Linux, macOS and Windows to programmatically manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
+As you probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. This means developers and system administrators can use the nifty SMO APIs in client apps or PowerShell cmdlets on Linux, macOS and Windows to programmatically manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-The REST API in this prototype is an [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) on .NET Core under the covers to connect to SQL Server running anywhere and browse Server, Database and Table data and metadata.
+The REST API in this prototype is an [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) on .NET Core under the covers to dynamically discover and browse data and metadata for SQL Server running anywhere.
 
 The prototyle only implements the ```GET``` verb at the moment. Other verbs (```PUT``` ```POST``` and ```DELETE```) are coming next.
 
