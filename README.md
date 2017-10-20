@@ -6,7 +6,7 @@ Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https
 
 This repo has a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs under the covers to connect to a SQL Server instance running anywhere.
 
-You can use environment variables to configure connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. The prototype connects to the specified SQL instance using SMO APIs and provides a RESTful interface to browse the Server, Databases, Tables & Columns. For fun, it also has a REST end-point to generate ```CREATE T-SQL``` scripts for Databases and Tables. The prototype is built using .NET Core 2.0 and you can run it on Linux, macOS, Windows and in Docker.
+You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. The prototype connects to the specified SQL instance using SMO APIs and provides a RESTful interface to browse the Server, Databases, Tables & Columns. For fun, it also has a REST end-point to generate ```CREATE T-SQL``` scripts for Databases and Tables. The prototype is built using .NET Core 2.0 and you can run it on Linux, macOS, Windows and in Docker.
 
 Currently, the prototype only supports the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
 
