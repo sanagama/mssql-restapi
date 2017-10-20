@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 using Serilog;
 using Serilog.Events;
 
-namespace MSSqlWebapi.Controllers
+namespace MSSqlRestApi.Controllers
 {
     [Route(Constants.RoutePathRoot + "/databases/{dbName}/tables/{schemaName}/{tableName}/columns")]
     public class ColumnsController : Controller

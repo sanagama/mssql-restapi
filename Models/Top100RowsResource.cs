@@ -7,7 +7,7 @@ using Serilog;
 using Serilog.Events;
 using System.Data;
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public sealed class Top100RowsResource : Resource
     {

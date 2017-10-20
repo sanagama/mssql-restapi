@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public abstract class Resource
     {

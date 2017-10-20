@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 
-namespace MSSqlWebapi.Controllers
+namespace MSSqlRestApi.Controllers
 {
     [Route(Constants.RoutePathRoot)]
     public class ServerController : Controller

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 using Serilog;
 using Serilog.Events;
 
-namespace MSSqlWebapi.Controllers
+namespace MSSqlRestApi.Controllers
 {
     // See: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing
     [Route(Constants.RoutePathRoot + "/databases")]

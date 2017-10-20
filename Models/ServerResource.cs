@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public class ServerResource : Resource
     {

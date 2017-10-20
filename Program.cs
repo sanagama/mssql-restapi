@@ -9,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 
-namespace MSSqlWebapi
+namespace MSSqlRestApi
 {
     public class Program
     {
@@ -27,7 +27,7 @@ namespace MSSqlWebapi
 
             try
             {
-                Log.Information("*** REST API for SQL Server (hosted on ASP.NET Core Web API)");
+                Log.Information("*** REST API middle-tier for SQL Server");
                 TestSqlServerConnection();
                 StartWebHost();
                 return 0;

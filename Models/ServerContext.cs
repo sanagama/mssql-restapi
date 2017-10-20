@@ -6,7 +6,7 @@ using Serilog.Events;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public class ServerContext
     {

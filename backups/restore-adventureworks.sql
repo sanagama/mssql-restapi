@@ -2,9 +2,7 @@
  * Restore AdventureworksLT to SQL Server running in Docker container
  */
 
--- Dump database names
-SELECT NAME FROM SYS.DATABASES
-GO
+PRINT "Restoring Adventureworks..."
 
 -- Restore database into Docker container
 -- The .BAK file is in the '/backups' directory that is mounted as a volume in the Docker container

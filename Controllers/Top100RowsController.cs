@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 
-namespace MSSqlWebapi.Controllers
+namespace MSSqlRestApi.Controllers
 {
     [Route(Constants.RoutePathRoot + "/databases/{dbName}/tables/{schemaName}/{tableName}/top100rows")]
     public class Top100RowsController : Controller

@@ -6,7 +6,7 @@ using Serilog;
 using Serilog.Events;
 using System.Collections.Specialized;
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public sealed class TableScriptResource : Resource
     {

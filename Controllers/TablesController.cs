@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 using Serilog;
 using Serilog.Events;
 
-namespace MSSqlWebapi.Controllers
+namespace MSSqlRestApi.Controllers
 {
     [Route(Constants.RoutePathRoot + "/databases/{dbName}/tables")]
     public class TablesController : Controller
@@ -36,7 +36,7 @@ namespace MSSqlWebapi.Controllers
             // Get all tables in all schemas in this database
             smoDb.Tables.Refresh();
             var query = from table in smoDb.Tables.Cast<SMO.Table>()
-            where !table.IsSystemObject
+//            where !table.IsSystemObject
             orderby table.Schema
             select table;
 

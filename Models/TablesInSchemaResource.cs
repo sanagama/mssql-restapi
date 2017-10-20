@@ -7,7 +7,7 @@ using SMOCommon = Microsoft.SqlServer.Management.Common;
 using Serilog;
 using Serilog.Events;
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public sealed class TablesInSchemaResource : Resource
     {        
@@ -34,7 +34,7 @@ namespace MSSqlWebapi.Models
             // Get tables in the specified schema
             smoDb.Tables.Refresh();
             var query = from table in smoDb.Tables.Cast<SMO.Table>()
-            where !table.IsSystemObject && table.Schema.Equals(this.SchemaName, StringComparison.OrdinalIgnoreCase)
+            where table.Schema.Equals(this.SchemaName, StringComparison.OrdinalIgnoreCase)
             select table;
 
             foreach(var table in query)

@@ -1,4 +1,4 @@
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public static class RouteNames
     {

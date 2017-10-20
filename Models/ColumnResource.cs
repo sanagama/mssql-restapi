@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public sealed class ColumnResource : Resource
     {

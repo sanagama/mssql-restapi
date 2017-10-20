@@ -6,7 +6,7 @@ using SMOCommon = Microsoft.SqlServer.Management.Common;
 using Serilog;
 using Serilog.Events;
 
-namespace MSSqlWebapi.Models
+namespace MSSqlRestApi.Models
 {
     public sealed class TableResource : Resource
     {        

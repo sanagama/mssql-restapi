@@ -2,9 +2,8 @@
 
 set -x
 
-docker build . -t sanagama/mssql-webapi
+docker build . -t sanagama/mssql-restapi
 
 docker images
 
-docker push sanagama/mssql-webapi
-
+docker push sanagama/mssql-restapi

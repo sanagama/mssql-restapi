@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Events;
-using MSSqlWebapi.Models;
+using MSSqlRestApi.Models;
 
-namespace MSSqlWebapi
+namespace MSSqlRestApi
 {
     public class Startup
     {
