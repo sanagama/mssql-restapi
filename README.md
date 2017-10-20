@@ -1,6 +1,6 @@
 # What's here?
 
-This is a prototype of a simple REST API middle-tier that uses SMO on .NET Core 2.0 to connect to SQL running anywhere and dynamically browse Server, Database and Table data and metadata.
+This is a prototype of a simple REST API middle-tier that uses the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs on .NET Core 2.0 to connect to SQL running anywhere and dynamically browse Server, Database and Table data and metadata.
 
 As you probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can now use the nifty SMO APIs in .NET Core 2.0 client apps or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
