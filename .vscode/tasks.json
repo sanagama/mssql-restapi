@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/mssql-webapi.csproj"
+                "${workspaceRoot}/mssql-restapi.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

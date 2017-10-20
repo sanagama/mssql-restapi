@@ -9,7 +9,7 @@ LABEL version=1.0
 
 # Environment variables
 # Chaining the ENV allows for only one layer, instead of one per ENV statement
-ENV HOMEDIR=/mssql-webapi \
+ENV HOMEDIR=/mssql-restapi \
     MSSQL_HOST=127.0.0.1 \
     MSSQL_PORT=1433 \
     MSSQL_USERNAME=sa \

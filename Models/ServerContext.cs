@@ -70,7 +70,7 @@ namespace MSSqlRestApi.Models
                 {
                     // Build connection string
                     SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                    builder.ApplicationName = "mssql-webapi";
+                    builder.ApplicationName = "mssql-restapi";
                     builder.DataSource = this._host + "," + this._port;
                     builder.UserID = this._username;
                     builder.Password = this._password;
