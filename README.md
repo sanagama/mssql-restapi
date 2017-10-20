@@ -1,12 +1,12 @@
 # What's here?
 
-This is a *prototype* of a simple REST API middle-tier that uses the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs to connect to SQL running anywhere and dynamically browse Server, Database and Table data and metadata. The prototype is built using .NET Core 2.0 and can run on Linux, macOS, Windows and in Docker. 
+This *prototype* is a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs under the covers to connect to a SQL Server instance running anywhere.
+
+After it is configured to connect to a SQL Server instance via environment variables, it dynamically discovers data and metadata in the instance and provides a RESTful interface to browse the Server, Databases, Tables and Columns via URIs. For fun, it also provides a REST end-point to generate CREATE scripts for Databases and Tables. The prototype is built using .NET Core 2.0 and can run on Linux, macOS, Windows and in Docker.
 
 As you probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
-
-This prototype is an [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs under the covers to dynamically discover and provide a RESTful interface for the data and metadata in a SQL Server instance. It also has a REST end-point to generate CREATE scripts for databases and tables.
 
 Currently, the prototype only implements the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
 
