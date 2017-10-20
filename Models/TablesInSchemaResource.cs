@@ -11,16 +11,16 @@ namespace MSSqlRestApi.Models
 {
     public sealed class TablesInSchemaResource : Resource
     {        
-        public string SchemaName { get; set; }
-        public string ParentDatabase { get; set; }
+        public string Schema { get; set; }
+        public string Database { get; set; }
         public Dictionary<string, Uri> Tables { get; set; }
         private ServerContext _context;
         
         public TablesInSchemaResource(ServerContext context, string dbName, string schemaName, IUrlHelper urlHelper)
         {
             this._context = context;
-            this.ParentDatabase = dbName;
-            this.SchemaName = schemaName;
+            this.Database = dbName;
+            this.Schema = schemaName;
             this.Tables = new Dictionary<string, Uri>();
 
             // Get database by name
@@ -34,7 +34,7 @@ namespace MSSqlRestApi.Models
             // Get tables in the specified schema
             smoDb.Tables.Refresh();
             var query = from table in smoDb.Tables.Cast<SMO.Table>()
-            where table.Schema.Equals(this.SchemaName, StringComparison.OrdinalIgnoreCase)
+            where table.Schema.Equals(this.Schema, StringComparison.OrdinalIgnoreCase)
             select table;
 
             foreach(var table in query)
@@ -45,8 +45,8 @@ namespace MSSqlRestApi.Models
                     RouteNames.Table,
                     new
                     {
-                        dbName = this.ParentDatabase,
-                        schemaName = this.SchemaName,
+                        dbName = this.Database,
+                        schemaName = this.Schema,
                         tableName = tableName
                     },
                     urlHelper.ActionContext.HttpContext.Request.Scheme
@@ -64,8 +64,8 @@ namespace MSSqlRestApi.Models
                 RouteNames.TablesInSchema,
                 new
                 {
-                    dbName = this.ParentDatabase,
-                    schemaName = this.SchemaName
+                    dbName = this.Database,
+                    schemaName = this.Schema
                 },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
@@ -74,7 +74,7 @@ namespace MSSqlRestApi.Models
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
                 RouteNames.Database,
-                new { dbName = this.ParentDatabase },
+                new { dbName = this.Database },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
         }

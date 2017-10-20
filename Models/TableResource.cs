@@ -12,7 +12,7 @@ namespace MSSqlRestApi.Models
     {        
         public string Name { get { return this._smoTable.Name; } }
         public int Id { get { return this._smoTable.ID; } }
-        public string ParentDatabase { get { return this._smoTable.Parent.Name; } }
+        public string Database { get { return this._smoTable.Parent.Name; } }
         public string Schema { get { return this._smoTable.Schema; } }
         public DateTime CreateDate { get { return this._smoTable.CreateDate; } }
         public long RowCount { get { return this._smoTable.RowCount; } }
@@ -55,7 +55,7 @@ namespace MSSqlRestApi.Models
                 RouteNames.Table,
                 new
                 {
-                    dbName = this.ParentDatabase,
+                    dbName = this.Database,
                     schemaName = this.Schema,
                     tableName = this.Name
                 },
@@ -66,7 +66,7 @@ namespace MSSqlRestApi.Models
             base.links[Constants.LinkNameParent] = new Uri(
                 urlHelper.RouteUrl(
                 RouteNames.Database,
-                new { dbName = this.ParentDatabase },
+                new { dbName = this.Database },
                 urlHelper.ActionContext.HttpContext.Request.Scheme
             ));
 
@@ -76,7 +76,7 @@ namespace MSSqlRestApi.Models
                 RouteNames.TableScript,
                 new
                 {
-                    dbName = this.ParentDatabase,
+                    dbName = this.Database,
                     schemaName = this.Schema,
                     tableName = this.Name
                 },
@@ -89,7 +89,7 @@ namespace MSSqlRestApi.Models
                 RouteNames.TableColumns,
                 new
                 {
-                    dbName = this.ParentDatabase,
+                    dbName = this.Database,
                     schemaName = this.Schema,
                     tableName = this.Name
                 },
@@ -102,7 +102,7 @@ namespace MSSqlRestApi.Models
                 RouteNames.TableTop100Rows,
                 new
                 {
-                    dbName = this.ParentDatabase,
+                    dbName = this.Database,
                     schemaName = this.Schema,
                     tableName = this.Name
                 },
