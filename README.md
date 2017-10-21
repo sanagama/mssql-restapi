@@ -12,7 +12,7 @@ For fun, I've added ```GET``` REST API end-points to:
 
 Thanks to SMO, the REST API always returns up-to-date information if there are schema or data changes in the database while the web app is running.
 
-Currently, the prototype only supports the ```GET``` verb. I hope to support additional database objects and verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```) in the near future.
+Currently, the web app only supports the ```GET``` verb. I hope to support additional database objects and verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```) in the near future.
 
 ## Try it out!
 
@@ -146,4 +146,4 @@ As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-Profit ;-)
+Happy programming with SMO ;-)
