@@ -10,7 +10,7 @@ For fun, I've added ```GET``` REST API end-points to:
 - generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts
 - view data in tables
 
-Thanks to SMO, the web app dynamically updates database metadata when there are database changes.
+Thanks to SMO, the REST API always returns up-to-date information if there are schema or data changes in the database while the web app is running.
 
 Currently, the prototype only supports the ```GET``` verb. I hope to support additional database objects and verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```) in the near future.
 
