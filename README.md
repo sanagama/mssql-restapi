@@ -52,7 +52,7 @@ docker run -it -p 5000:5000 sanagama/mssql-restapi
 
 > *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) extension is a great way to play with REST APIs.
 
-- Launch your browser and browse to <http://localhost:5000/api/mssql>
+- Launch your browser and navigate to <http://localhost:5000/api/mssql>
 - Click on the links in the JSON response to navigate databases, tables and column objects.
 
 
