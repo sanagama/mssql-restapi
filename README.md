@@ -1,14 +1,10 @@
 # What's here?
 
-This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that provides a RESTful interface for the Server, Databases, Tables and Columns in a SQL Server instance running anywhere.
+This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to provide a RESTful interface for SQL Server.
 
-- Built using .NET Core 2.0. Runs in Linux, macOS, Windows and in Docker.
-- Can be deployed on the same or different computer as SQL Server.
-- Uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to access SQL Server.
+The prototype can run in Linux, macOS, Windows and in Docker and can be deployed on the same or different computer as SQL Server. You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. For fun, it also has a REST end-point to generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts.
 
-You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. For fun, it also has a REST end-point to generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts using SMO APIs. 
-
-Currently, the prototype only supports the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
+Currently, the prototype only supports the ```GET``` verb for the Server, Databases, Tables and Columns. I hope to support additional database objects and verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) in the future.
 
 ## Context
 
