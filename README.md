@@ -1,8 +1,10 @@
 # What's here?
 
-This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that provides a RESTful interface to browse the Server, Databases, Tables and Columns in a SQL Server instance running anywhere.
+This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that provides a RESTful interface for the Server, Databases, Tables and Columns in a SQL Server instance running anywhere.
 
-The Web API app is built using .NET Core 2.0, runs in Linux, macOS, Windows and in Docker and uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to access SQL Server.
+- Built using .NET Core 2.0. Runs in Linux, macOS, Windows and in Docker.
+- Can be deployed on the same or different computer as SQL Server.
+- Uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to access SQL Server.
 
 You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. For fun, it also has a REST end-point to generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts using SMO APIs. 
 
