@@ -2,7 +2,7 @@
 
 This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to provide a RESTful interface for SQL Server running anywhere.
 
-You can run this prototype on Linux, macOS, Windows or Docker and optionally use environment variables to connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
+You can run this prototype on Linux, macOS, Windows or Docker and optionally use [environment variables](#environment-variables) to connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
 
 For fun, I've added ```GET``` REST end-points to:
 
@@ -45,6 +45,8 @@ docker pull sanagama/mssql-restapi
 
 docker run -it -p 5000:5000 sanagama/mssql-restapi
 ```
+
+>*NOTE:* The REST API web app uses default values for *server*, *username* and *password* as described in [environment variables](#environment-variables)
 
 ### Step 3: Play with the REST API
 
