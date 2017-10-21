@@ -4,9 +4,9 @@ This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/
 
 You can run this prototype on Linux, macOS, Windows or Docker and optionally use [environment variables](#environment-variables) to connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
 
-For fun, I've added ```GET``` REST end-points to:
+For fun, I've added ```GET``` REST API end-points to:
 
-- navigate from **Server** -> **Databases** -> **Tables** -> **Columns**
+- navigate **Server** -> **Databases** -> **Tables** -> **Columns**
 - generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts
 - view data in tables
 
