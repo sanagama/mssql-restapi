@@ -1,6 +1,6 @@
 #
-# Simple REST API for SQL Server with ASP.NET Core Web API + SMO on .NET Core
-# Sept 2017
+# A simple REST API for SQL Server using SMO on .NET Core
+# Oct 2017
 #
 
 FROM microsoft/aspnetcore-build:latest
