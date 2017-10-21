@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Serilog.Events;
+using System.Collections.Specialized;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using MSSqlRestApi.Models;
-using Serilog;
-using Serilog.Events;
 
 namespace MSSqlRestApi.Controllers
 {
@@ -36,7 +37,6 @@ namespace MSSqlRestApi.Controllers
             // Get all tables in all schemas in this database
             smoDb.Tables.Refresh();
             var query = from table in smoDb.Tables.Cast<SMO.Table>()
-//            where !table.IsSystemObject
             orderby table.Schema
             select table;
 

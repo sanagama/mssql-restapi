@@ -73,12 +73,13 @@ dotnet run
 
 You can use environment variables to to make the prototype connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
 
-Environment variable | Default Value | Description
---------------- | ------ | ------------
-**MSSQL_HOST** | *127.0.0.1* | The fully qualified server name
-**MSSQL_PORT** | *1433* | SQL Server port
-**MSSQL_USERNAME** | *sa* | Username for SQL Server authentication
-**MSSQL_PASSWORD** | *Yukon900* | Password for SQL Server authentication
+Environment variable | Description
+--------------- | ------------
+**MSSQL_HOST** | Fully qualified server name. Defaults to *127.0.0.1* if not specified.
+**MSSQL_PORT** | SQL Server port. Defaults to *1433* if not specified.
+**MSSQL_DATABASE** | Initial catalog for the connection. Defaults to *master* if not specified.
+**MSSQL_USERNAME** | Username for SQL Server authentication. Defaults to *sa* if not specified.
+**MSSQL_PASSWORD** | Password for SQL Server authentication. Defaults to *Yukon900* if not specified.
 
 ## Connect to Azure SQL Database or Azure SQL Data Warehouse
 

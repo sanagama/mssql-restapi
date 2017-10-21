@@ -1,11 +1,11 @@
 using System;
+using System.Data;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using SMO = Microsoft.SqlServer.Management.Smo;  
-using SMOCommon = Microsoft.SqlServer.Management.Common;  
 using Serilog;
 using Serilog.Events;
-using System.Data;
+using SMO = Microsoft.SqlServer.Management.Smo;  
+using SMOCommon = Microsoft.SqlServer.Management.Common;  
 
 namespace MSSqlRestApi.Models
 {

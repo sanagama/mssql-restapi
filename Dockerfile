@@ -12,6 +12,7 @@ LABEL version=1.0
 ENV HOMEDIR=/mssql-restapi \
     MSSQL_HOST=127.0.0.1 \
     MSSQL_PORT=1433 \
+    MSSQL_DATABASe=master \
     MSSQL_USERNAME=sa \
     MSSQL_PASSWORD=Yukon900
 

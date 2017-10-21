@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Serilog.Events;
 using SMO = Microsoft.SqlServer.Management.Smo;  
 using SMOCommon = Microsoft.SqlServer.Management.Common;  
 
@@ -8,12 +10,31 @@ namespace MSSqlRestApi.Models
 {
     public class ServerResource : Resource
     {
-        public string Name { get { return this.SmoServer.Name; }  }
-        public string Product { get { return this.SmoServer.Product; } }
-        public string HostPlatform { get{ return this.SmoServer.HostPlatform; } }
-        public string Edition { get { return this.SmoServer.Edition; } }
-        public string VersionString { get { return this.SmoServer.VersionString; } }
+        public string ServerName { get { return this.SmoServer.Name; }  }
         
+        public string Product
+        {
+            // Azure SQL DB and Azure SQL DW don't support the 'Product' property
+            get
+            {
+                string retVal = "Unknown";
+                if(this.SmoServer.ServerType == SMOCommon.DatabaseEngineType.Standalone)
+                {
+                    retVal = this.SmoServer.Product;
+                }
+                return retVal;
+            }
+        }
+        public string HostPlatform { get{ return this.SmoServer.HostPlatform; } }
+        public string ServerType { get { return this.SmoServer.ServerType.ToString(); } }
+        public string Edition { get { return this.SmoServer.Edition; } }
+        public string EngineEdition { get { return this.SmoServer.EngineEdition.ToString(); } }
+        public string ProductLevel { get { return this.SmoServer.ProductLevel; } }
+        public string Collation { get { return this.SmoServer.Collation; }  }
+        public string VersionString { get { return this.SmoServer.VersionString; } }
+        public string ResourceVersionString { get { return this.SmoServer.ResourceVersionString; } }
+
+
         public Uri Databases { get; set; }
         private ServerContext _context;
         private SMO.Server SmoServer { get { return this._context.SmoServer; } }
