@@ -1,14 +1,18 @@
 # What's here?
 
+This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that provides a RESTful interface to browse the Server, Databases, Tables and Columns in a SQL Server instance running anywhere.
+
+- built using .NET Core 2.0
+- runs in Linux, macOS, Windows and in Docker
+- uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to access SQL Server
+
+You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. For fun, it also has a REST end-point to generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts using SMO APIs. 
+
+Currently, the prototype only supports the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
+
 As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
-
-This repo has a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs under the covers to connect to a SQL Server instance running anywhere.
-
-You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. The prototype connects to the specified SQL instance using SMO APIs and provides a RESTful interface to browse the Server, Databases, Tables & Columns. For fun, it also has a REST end-point to generate ```CREATE T-SQL``` scripts for Databases and Tables. The prototype is built using .NET Core 2.0 and you can run it on Linux, macOS, Windows and in Docker.
-
-Currently, the prototype only supports the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
 
 ## Try it out!
 
