@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#
+# Sample script to pull and run SQL Server 2017 in Docker
+# The directory ~/mssql-restapi/backups is mounted as /backups in the Docker container
+#
 set -x
 
 docker pull microsoft/mssql-server-linux:2017-GA

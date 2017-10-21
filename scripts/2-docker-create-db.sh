@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#
+# Script to create sample databases (Adventureworks, BollywoodDB & WideWorldImporters) in SQL Server 2017 in Docker
+#
 set -x
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
