@@ -8,6 +8,8 @@ Currently, the prototype only supports the ```GET``` verb for Server, Database, 
 
 ## Context
 
+The main motivation for this prototype was to try out the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs on .NET Core 2.0.
+
 As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps (like this prototype) or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
@@ -35,7 +37,7 @@ The instructions below are for a MacBook with SQL Server 2017 running in Docker.
 
 Launch a ```Terminal``` window and type the following commands to start SQL Server 2017 in Docker:
 
-```bash
+```
 cd ~/mssql-restapi
 cat ./scripts/1-docker-mssql.sh
 ./scripts/1-docker-mssql.sh
@@ -43,7 +45,7 @@ cat ./scripts/1-docker-mssql.sh
 
 Type the following commands in the ```Terminal``` window to restore a couple of sample databases to SQL Servr 2017 running in Docker:
 
-```bash
+```
 cd ~/mssql-restapi
 cat ./scripts/2-docker-create-db.sh
 ./scripts/2-docker-create-db.sh
@@ -53,7 +55,7 @@ cat ./scripts/2-docker-create-db.sh
 
 Type the following commands in the ```Terminal``` window to launch the REST API:
 
-```bash
+```
 cd ~/mssql-restapi
 dotnet restore
 dotnet build
@@ -66,3 +68,44 @@ dotnet run
 
 - Launch a browser and browse to <http://localhost:5000/api/mssql>
 - Click on the links in the JSON response to navigate database objects.
+
+## Environment variables
+
+You can the environment variables below to configure the connection to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
+
+Environment variable | Default Value | Description
+--------------- | ------ | ------------
+**MSSQL_HOST** | *127.0.0.1* | The fully qualified server name
+**MSSQL_PORT** | *1433* | SQL Server port
+**MSSQL_USERNAME** | *sa* | Username for SQL Server authentication
+**MSSQL_PASSWORD** | *Yukon900* | Password for SQL Server authentication
+
+## Using with Azure SQL Database or Azure SQL Data Warehouse
+
+Here's an example of how you can use environment variables to connect to an Azure SQL Database or Azure SQL Data Warehouse.
+
+>*TIP:* Follow the instructions at [Configure a server-level firewall rule](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal#create-a-server-level-firewall-rule) to allow the computer running the Web API app to connect to your Azure SQL Database.
+
+```
+MSSQL_HOST=<server>.database.windows.net \
+MSSQL_PORT=1433 \
+MSSQL_USERNAME=<your-username> \
+MSSQL_PASSWORD=<your-password> \
+dotnet run
+```
+
+## Using with Docker
+
+Type these commands in a ```Terminal``` window to run this prototype in Docker. You can use environment variables to specify the connection to a SQL Server instance.
+
+```
+docker pull sanagama/mssql-restapi
+
+docker run  -it --name 'mssql-restapi' \
+            -e 'MSSQL_HOST=<server>' \
+            -e 'MSSQL_PORT=<port>' \
+            -e 'MSSQL_USERNAME=<username>' \
+            -e 'MSSQL_PASSWORD=<password>' \
+            -p 5000:5000 \
+            sanagama/mssql-restapi
+```
