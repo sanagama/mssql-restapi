@@ -82,7 +82,7 @@ Environment variable | Default Value | Description
 
 ## Connect to Azure SQL Database or Azure SQL Data Warehouse
 
-You can use environment variables to use the prototype with an Azure SQL Database or Azure SQL Data Warehouse.
+Use environment variables to use the prototype with an Azure SQL Database or Azure SQL Data Warehouse.
 
 >*TIP:* Follow instructions at [Configure a server-level firewall rule](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal#create-a-server-level-firewall-rule) to allow the computer running the Web API app to connect to your Azure SQL Database.
 
@@ -98,7 +98,7 @@ dotnet run
 
 ## Running in Docker
 
-Type the commands below in a ```Terminal``` window to run this prototype in Docker. You can use environment variables to specify the connection to your SQL Server instance.
+Type the commands below in a ```Terminal``` window to run this prototype in Docker. Use environment variables to specify the connection to your SQL Server instance.
 
 >*TIP:* Replace *server*, *username* and *password* in the example below as appropriate for your SQL Server instance or Azure SQL Database.
 
@@ -109,5 +109,5 @@ MSSQL_HOST="<server>" \
 MSSQL_PORT="1433" \
 MSSQL_USERNAME="<username>" \
 MSSQL_PASSWORD="<password>" \
-docker run  -it --name 'mssql-restapi' -p 5000:5000 sanagama/mssql-restapi
+docker run -it --name 'mssql-restapi' -p 5000:5000 sanagama/mssql-restapi
 ```
