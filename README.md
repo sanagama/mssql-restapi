@@ -2,13 +2,13 @@
 
 This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that provides a RESTful interface to browse the Server, Databases, Tables and Columns in a SQL Server instance running anywhere.
 
-- built using .NET Core 2.0
-- runs in Linux, macOS, Windows and in Docker
-- uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to access SQL Server
+The Web API app is built using .NET Core 2.0, runs in Linux, macOS, Windows and in Docker and uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to access SQL Server.
 
 You can use environment variables to specify connection settings for SQL Server, Azure SQL Database and Azure SQL Data Warehouse. For fun, it also has a REST end-point to generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts using SMO APIs. 
 
 Currently, the prototype only supports the ```GET``` verb. Other verbs (```PUT``` ```POST``` ```UPDATE``` and ```DELETE```) are coming soon.
+
+## Context
 
 As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
