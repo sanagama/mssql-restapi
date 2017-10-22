@@ -126,13 +126,13 @@ Environment variable | Description
 
 ## Use with Azure SQL Database or Azure SQL Data Warehouse
 
-Pass environment variables to the REST API web app to connect to Azure SQL Database or Azure SQL Data Warehouse.
+You can connect to Azure SQL Database or Azure SQL Data Warehouse by passing your connection information in environment variables when starting the REST API web app.
 
->*TIP:* Follow instructions at [Configure a server-level firewall rule](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal#create-a-server-level-firewall-rule) to allow the computer running the REST API web app to connect to your Azure SQL Database.
+>*TIP:* Follow instructions at [Configure a server-level firewall rule](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal#create-a-server-level-firewall-rule) to allow the computer running the REST API web app to connect to your Azure SQL Database or Azure SQL Data Warehouse.
 
 >*TIP:* Change **\<server\>**, **\<username\>** and **\<password\>** in the example below as appropriate to connect to your Azure SQL Database or Azure SQL Data Warehouse.
 
-To run the REST API web app in Docker, type the following commands in the ```Terminal``` window:
+Type the following commands in the ```Terminal``` window to run the REST API web app in Docker:
 ```
 docker run -it -p 5000:5000 \
            -e MSSQL_HOST="<server>.database.windows.net" \
@@ -142,7 +142,7 @@ docker run -it -p 5000:5000 \
            sanagama/mssql-restapi
 ```
 
-To run the REST API web app locally with .NET Core, type the following commands in the ```Terminal``` window:
+Type the following commands in the ```Terminal``` window to run the REST API web app locally with .NET Core:
 ```
 MSSQL_HOST="<server>.database.windows.net" \
 MSSQL_PORT="1433" \
@@ -153,10 +153,12 @@ dotnet run
 
 ## Motivation
 
-My main motivation to create this prototype was to try out the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs on .NET Core 2.0.
+My main motivation for creating this prototype was to try out the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs that are now available on .NET Core 2.0. 
 
-As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs are now available on .NET Core 2.0. Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps (like this prototype) or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
+See this [Tweet](https://twitter.com/sqltoolsguy/status/916445930387152896) from [@sqltoolsguy](https://twitter.com/sqltoolsguy).
+
+Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps (like this prototype) or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-Happy programming with SMO and SQL Server running anywhere ;-)
+Happy programming with SMO and SQL Server running everywhere ;-)
