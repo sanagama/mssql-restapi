@@ -4,15 +4,15 @@ This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/
 
 You can run this prototype on Linux, macOS, Windows or Docker and optionally use [environment variables](#environment-variables) to connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
 
-For fun, I've added ```GET``` REST end-points to:
+For fun, I've added ```GET``` REST API end-points to:
 
-- navigate from **Server** -> **Databases** -> **Tables** -> **Columns**
+- navigate **Server** -> **Databases** -> **Tables** -> **Columns**
 - generate ```CREATE DATABASE``` and ```CREATE TABLE``` T-SQL scripts
 - view data in tables
 
-Thanks to SMO, the web app dynamically updates database metadata when there are database changes.
+Thanks to SMO, the REST API always returns up-to-date information when any schema or data changes occur in the database while the web app is running.
 
-Currently, the prototype only supports the ```GET``` verb. I hope to support additional database objects and verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```) in the near future.
+Currently, the web app only supports the ```GET``` verb. I hope to support additional database objects and verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```) in the near future.
 
 ## Try it out!
 
@@ -52,7 +52,7 @@ docker run -it -p 5000:5000 sanagama/mssql-restapi
 
 > *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) extension is a great way to play with REST APIs.
 
-- Launch your browser and browse to <http://localhost:5000/api/mssql>
+- Launch your browser and navigate to <http://localhost:5000/api/mssql>
 - Click on the links in the JSON response to navigate databases, tables and column objects.
 
 
@@ -146,4 +146,4 @@ As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-Profit ;-)
+Happy programming with SMO ;-)
