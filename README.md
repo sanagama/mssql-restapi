@@ -12,7 +12,11 @@ For fun, I've added ```GET``` REST API end-points to:
 
 Thanks to SMO, the REST API always returns up-to-date information when any schema or data changes occur in the database while the web app is running.
 
-Currently, the web app only supports the ```GET``` verb. I hope to support additional database objects and verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```) in the near future.
+Currently, only the the ```GET``` verb is supported. In the future, I plan to add support for:
+
+- other REST verbs (```PUT```, ```POST```, ```UPDATE``` and ```DELETE```)
+- more database objects such as Views, Stored Procedures, Schemas and UDTs
+- pagination for tables with a large number of rows
 
 ## Try it out!
 
