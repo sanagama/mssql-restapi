@@ -27,7 +27,7 @@ namespace MSSqlRestApi
 
             try
             {
-                Log.Information("*** REST API middle-tier for SQL Server");
+                Log.Information("*** REST API for SQL Server, Azure SQL Database and Azure SQL Data Warehouse.");
                 TestSqlServerConnection();
                 StartWebHost();
                 return 0;

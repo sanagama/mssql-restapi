@@ -15,8 +15,9 @@ set -x
 
 docker pull sanagama/mssql-restapi
 
-MSSQL_HOST="<server>.database.windows.net" \
-MSSQL_PORT="1433" \
-MSSQL_USERNAME="<username>" \
-MSSQL_PASSWORD="<password>" \
-docker run -it --name 'mssql-restapi' -p 5000:5000 sanagama/mssql-restapi
+docker run -it -p 5000:5000 \
+           -e MSSQL_HOST="<server>.database.windows.net" \
+           -e MSSQL_PORT="1433" \
+           -e MSSQL_USERNAME="<username>" \
+           -e MSSQL_PASSWORD="<password>" \
+           sanagama/mssql-restapi

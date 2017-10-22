@@ -14,10 +14,10 @@ namespace MSSqlRestApi.Models
         
         public string Product
         {
-            // Azure SQL DB and Azure SQL DW don't support the 'Product' property
+            // Azure SQL DB and Azure SQL DW don't support the SMO Product' property
             get
             {
-                string retVal = "Unknown";
+                string retVal = "Not Available";
                 if(this.SmoServer.ServerType == SMOCommon.DatabaseEngineType.Standalone)
                 {
                     retVal = this.SmoServer.Product;
