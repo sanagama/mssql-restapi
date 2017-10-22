@@ -105,6 +105,11 @@ dotnet build
 dotnet run
 ```
 
+### Step 5: Play with the REST API
+
+- Launch your browser and navigate to <http://localhost:5000/api/mssql>
+- Click on the various links in the JSON response to navigate databases, tables, columns and table data in the SQL instance and generate scripts.
+
 ## Environment variables
 
 You can pass environment variables to the REST API web app to connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
