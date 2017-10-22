@@ -42,6 +42,8 @@ docker run --cap-add SYS_PTRACE \
 
 ### Step 2: Run the REST API web app in Docker
 
+This REST API web app is available on Docker hub: <https://hub.docker.com/r/sanagama/mssql-restapi>
+
 Copy & paste the commands below in a ```Terminal``` window to run the REST API web app in Docker and connect to SQL Server 2017 running locally in Docker.
 
 ```
