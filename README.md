@@ -60,6 +60,7 @@ docker run -it -p 5000:5000 -e MSSQL_HOST=`hostname` sanagama/mssql-restapi
 - Click on the various links in the JSON response to navigate databases, tables, columns and table data in the SQL instance and generate scripts.
 
 > That's it.
+
 > Keep reading if you want to get the source code and walk through a more advanced example with the AdventureWorks and WideWorldImporters SQL Server sample databases.
 
 ## Run locally with .NET Core
