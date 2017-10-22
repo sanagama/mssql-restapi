@@ -157,8 +157,8 @@ My main motivation for creating this prototype was to try out the [SQL Server Ma
 
 See [this Tweet](https://twitter.com/sqltoolsguy/status/916445930387152896) from [@sqltoolsguy](https://twitter.com/sqltoolsguy) for the announcement.
 
-Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps (like this prototype) or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
+Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps (like this prototype) or PowerShell cmdlets on Linux, macOS and Windows to programmatically manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-Happy programming with SMO and SQL Server running everywhere ;-)
+Happy coding with SMO and SQL Server running everywhere ;-)
