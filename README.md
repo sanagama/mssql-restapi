@@ -118,7 +118,7 @@ You can pass environment variables to the REST API web app to connect to Azure S
 
 >*TIP:* Follow instructions at [Configure a server-level firewall rule](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal#create-a-server-level-firewall-rule) to allow the computer running the REST API web app to connect to your Azure SQL Database.
 
->*TIP:* Replace *<server>*, *<username>* and *<password>* in the examples below as appropriate for your Azure SQL Database.
+>*TIP:* Replace *\<server\>*, *\<username\>* and *\<password\>* in the examples below as appropriate for your Azure SQL Database.
 
 Type the following commands in the ```Terminal``` window if you're running the REST API web app in Docker:
 ```
