@@ -161,4 +161,4 @@ Developers and system administrators can finally use the nifty SMO APIs in .NET 
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-Happy coding with SMO and SQL Server running everywhere ;-)
+Happy coding with SMO APIs and SQL Server running everywhere ;-)
