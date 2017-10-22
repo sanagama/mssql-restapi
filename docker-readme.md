@@ -8,7 +8,7 @@ Demo walkthrough + source code at: <https://github.com/sanagama/mssql-restapi>
 
 Type the commands below in a ```Terminal``` window to run this prototype in Docker. Use environment variables to specify the connection to your SQL Server instance.
 
->*TIP:* Replace *server*, *username* and *password* in the example below as appropriate for your SQL Server instance or Azure SQL Database.
+>Replace *<server>*, *<username>* and *<password>* in the example below as appropriate for your SQL Server instance or Azure SQL Database.
 
 ```
 docker pull sanagama/mssql-restapi
