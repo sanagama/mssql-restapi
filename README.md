@@ -153,7 +153,7 @@ dotnet run
 
 ## Motivation
 
-My main motivation for creating this prototype was to try out the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs that are now available on .NET Core 2.0. 
+My main motivation for creating this prototype was to try out the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs that recently became available on .NET Core 2.0. 
 
 See [this Tweet](https://twitter.com/sqltoolsguy/status/916445930387152896) from [@sqltoolsguy](https://twitter.com/sqltoolsguy) for the announcement.
 
