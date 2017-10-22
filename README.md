@@ -50,16 +50,16 @@ docker pull sanagama/mssql-restapi
 docker run -it -p 5000:5000 -e MSSQL_HOST=`hostname` sanagama/mssql-restapi
 ```
 
->*NOTE:* The REST API web app uses default values for *server*, *username* and *password* as described in [environment variables](#environment-variables)
+>*NOTE:* With the above command, the REST API web app uses default values for *port*, *database*, *username* and *password* as described in [environment variables](#environment-variables)
 
 ### Step 3: Play with the REST API
 
 > *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) extension is a great way to play with REST APIs.
 
 - Launch your browser and navigate to <http://localhost:5000/api/mssql>
-- Click on the various links in the JSON response to navigate databases, tables and column objects in the SQL instance.
+- Click on the various links in the JSON response to navigate databases, tables, columns and table data in the SQL instance and generate scripts.
 
-> That's it, all done. Keep reading if you want to get the source code and walk through a more advanced example.
+> That's it. Keep reading if you want to get the source code and walk through a more advanced example with the Adventuewworks and WideWorldImporters sample databases.
 
 ## Run locally with .NET Core
 
