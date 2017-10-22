@@ -1,6 +1,6 @@
 # What's here?
 
-This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) Web API app that uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to provide a RESTful interface for SQL Server running anywhere.
+This is a *prototype* of a simple [ASP.NET Core 2.0](https://docs.microsoft.com/en-us/aspnet/core/getting-started) REST API web app that uses [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) under the covers to provide a RESTful interface for SQL Server running anywhere.
 
 You can run this prototype on Linux, macOS, Windows or Docker and optionally use [environment variables](#environment-variables) to connect to a local or remote SQL Server instance, Azure SQL Database and Azure SQL Data Warehouse.
 
@@ -38,12 +38,12 @@ docker run --cap-add SYS_PTRACE \
 
 ### Step 2: Run the REST API web app in Docker
 
-Copy & paste the commands below in a ```Terminal``` window to run the REST API web app in Docker and connect to SQL Server 2017 running in Docker.
+Copy & paste the commands below in a ```Terminal``` window to run the REST API web app in Docker and connect to SQL Server 2017 running locally in Docker.
 
 ```
 docker pull sanagama/mssql-restapi
 
-docker run -it -p 5000:5000 sanagama/mssql-restapi
+docker run -it -p 5000:5000 -e MSSQL_HOST=`hostname` sanagama/mssql-restapi
 ```
 
 >*NOTE:* The REST API web app uses default values for *server*, *username* and *password* as described in [environment variables](#environment-variables)
@@ -53,8 +53,9 @@ docker run -it -p 5000:5000 sanagama/mssql-restapi
 > *TIP:* [Google Chrome](https://www.google.com/chrome/) with the [JSON Formatter](https://github.com/callumlocke/json-formatter) extension is a great way to play with REST APIs.
 
 - Launch your browser and navigate to <http://localhost:5000/api/mssql>
-- Click on the links in the JSON response to navigate databases, tables and column objects.
+- Click on the various links in the JSON response to navigate databases, tables and column objects in the SQL instance.
 
+> That's it, all done. Keep reading if you want to get the source code and walk through a more advanced example.
 
 ## Run locally with .NET Core
 
@@ -114,22 +115,23 @@ Environment variable | Description
 
 ## Use with Azure SQL Database or Azure SQL Data Warehouse
 
-You can pass environment variables to the REST API web app to connect to Azure SQL Database and Azure SQL Data Warehouse.
+Pass environment variables to the REST API web app to connect to Azure SQL Database or Azure SQL Data Warehouse.
 
 >*TIP:* Follow instructions at [Configure a server-level firewall rule](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal#create-a-server-level-firewall-rule) to allow the computer running the REST API web app to connect to your Azure SQL Database.
 
->*TIP:* Replace *\<server\>*, *\<username\>* and *\<password\>* in the examples below as appropriate for your Azure SQL Database.
+>*TIP:* Change **\<server\>**, **\<username\>** and **\<password\>** in the example below as appropriate to connect to your Azure SQL Database or Azure SQL Data Warehouse.
 
-Type the following commands in the ```Terminal``` window if you're running the REST API web app in Docker:
+To run the REST API web app in Docker, type the following commands in the ```Terminal``` window:
 ```
-MSSQL_HOST="<server>.database.windows.net" \
-MSSQL_PORT="1433" \
-MSSQL_USERNAME="<username>" \
-MSSQL_PASSWORD="<password>" \
-docker run -it --name 'mssql-restapi' -p 5000:5000 sanagama/mssql-restapi
+docker run -it -p 5000:5000 \
+           -e MSSQL_HOST="<server>.database.windows.net" \
+           -e MSSQL_PORT="1433" \
+           -e MSSQL_USERNAME="<username>" \
+           -e MSSQL_PASSWORD="<password>" \
+           sanagama/mssql-restapi
 ```
 
-Type the following commands in the ```Terminal``` window if you're running the REST API web app locally:
+To run the REST API web app locally with .NET Core, type the following commands in the ```Terminal``` window:
 ```
 MSSQL_HOST="<server>.database.windows.net" \
 MSSQL_PORT="1433" \
@@ -146,4 +148,4 @@ As you've probably heard, the [SQL Server Management Objects (SMO)](https://www.
 
 Take a look at the [SQL Server Management Objects (SMO) Programming Guide](https://docs.microsoft.com/en-us/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) for samples and API reference documentation.
 
-Happy programming with SMO ;-)
+Happy programming with SMO and SQL Server running anywhere ;-)
