@@ -155,7 +155,7 @@ dotnet run
 
 My main motivation for creating this prototype was to try out the [SQL Server Management Objects (SMO)](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) APIs that are now available on .NET Core 2.0. 
 
-See this [Tweet](https://twitter.com/sqltoolsguy/status/916445930387152896) from [@sqltoolsguy](https://twitter.com/sqltoolsguy).
+See [this Tweet](https://twitter.com/sqltoolsguy/status/916445930387152896) from [@sqltoolsguy](https://twitter.com/sqltoolsguy) for the announcement.
 
 Developers and system administrators can finally use the nifty SMO APIs in .NET Core 2.0 client apps (like this prototype) or PowerShell cmdlets on Linux, macOS and Windows to programmatically connect to and manage SQL Server running anywhere, Azure SQL Database and Azure SQL Data Warehouse.
 
