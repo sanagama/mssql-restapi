@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Script to pull and run sanagama/mssql-restapi in Docker and connect to an Azure SQL Database.
+# Pull and run sanagama/mssql-restapi in Docker and connect to an Azure SQL Database.
 #
 # Replace the following before running this script:
 #  <server>: Azure SQL DB logical server name

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Script to run Web API app and connect to an Azure SQL Database.
+# Run mssql-restapi locally with .NET Core 2.0 and connect to an Azure SQL Database.
 #
 # Replace the following before running this script:
 #  <server>: Azure SQL DB logical server name

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Script to create sample databases (Adventureworks, BollywoodDB & WideWorldImporters) in SQL Server 2017 in Docker
+# Create sample databases (Adventureworks, BollywoodDB & WideWorldImporters) in SQL Server 2017 in Docker
 #
 set -x
 

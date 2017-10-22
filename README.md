@@ -84,8 +84,8 @@ Launch a ```Terminal``` window and type the following commands to run SQL Server
 
 ```
 cd ~/mssql-restapi
-cat ./scripts/1-docker-mssql.sh
-./scripts/1-docker-mssql.sh
+cat ./scripts/1-docker-pull-mssql.sh
+./scripts/1-docker-pull-mssql.sh
 ```
 
 ### Step 3: Restore sample databases
@@ -94,8 +94,8 @@ Type the following commands in the ```Terminal``` window to restore a couple of 
 
 ```
 cd ~/mssql-restapi
-cat ./scripts/2-docker-create-db.sh
-./scripts/2-docker-create-db.sh
+cat ./scripts/3-docker-create-db.sh
+./scripts/3-docker-create-db.sh
 ```
 
 ### Step 4: Run the REST API web app locally
