@@ -10,5 +10,5 @@ set -x
 
 docker pull sanagama/mssql-restapi
 
-docker run --name 'mssql-restapi' -it -p 5000:5000 -e MSSQL_HOST=`hostname` sanagama/mssql-restapi
+docker run --name 'mssql-restapi' -it -p 5000:5000 -e MSSQL_HOST=`hostname -s` sanagama/mssql-restapi
 
