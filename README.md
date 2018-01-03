@@ -49,7 +49,7 @@ Copy & paste the commands below in a ```Terminal``` window to run the REST API w
 ```
 docker pull sanagama/mssql-restapi
 
-docker run -it -p 5000:5000 -e MSSQL_HOST=`hostname` sanagama/mssql-restapi
+docker run -it -p 5000:5000 -e MSSQL_HOST=`hostname -s` sanagama/mssql-restapi
 ```
 
 >*NOTE:* With the above command, the REST API web app uses default values for *port*, *database*, *username* and *password* as described in [environment variables](#environment-variables)
